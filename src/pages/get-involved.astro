@@ -1,0 +1,139 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import AskQuestionBox from "@/components/AskQuestionBox.astro";
+---
+
+<Layout
+  title="Get Involved | Virginia Legal Brief"
+  description="Send a case tip, request a document breakdown, or learn about joining the Virginia Legal Brief editorial team."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-9 max-w-3xl sm:mb-12">
+      <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+        Contribute to the brief
+      </p>
+      <h1
+        class="font-heading text-forest mt-3 text-5xl leading-tight font-bold sm:text-6xl"
+      >
+        Get Involved
+      </h1>
+      <p
+        class="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg"
+      >
+        Readers, students, and researchers can help surface the cases,
+        documents, and everyday questions that deserve a clear explanation.
+      </p>
+    </header>
+
+    <section class="grid gap-4 md:grid-cols-3" aria-label="Ways to contribute">
+      <article class="border-border bg-muted rounded-2xl border p-5">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          01 · Case tips
+        </p>
+        <h2 class="mt-2 text-xl font-bold">Point us to a decision</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Share a court opinion, statute, public filing, or policy update that
+          may affect Virginia readers.
+        </p>
+      </article>
+      <article class="border-border bg-muted rounded-2xl border p-5">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          02 · Document requests
+        </p>
+        <h2 class="mt-2 text-xl font-bold">Ask about the fine print</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Request a plain-English breakdown of a job, lease, bank, or app term.
+          Remove names and account details before sharing.
+        </p>
+      </article>
+      <article class="border-border bg-muted rounded-2xl border p-5">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          03 · Editorial team
+        </p>
+        <h2 class="mt-2 text-xl font-bold">Join the research desk</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Students and researchers interested in source-based legal and
+          financial reporting can email the team to ask about opportunities.
+        </p>
+      </article>
+    </section>
+
+    <section
+      class="bg-forest text-parchment mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl p-5 sm:p-7"
+    >
+      <div>
+        <p class="text-manila text-xs font-bold tracking-[0.14em] uppercase">
+          Editorial desk
+        </p>
+        <h2 class="mt-2 text-2xl font-bold">virginialegalbrief@gmail.com</h2>
+        <p class="text-parchment/80 mt-2 text-sm">
+          Use the question form below or email the team directly.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="mailto:virginialegalbrief@gmail.com"
+          class="bg-marigold text-forest rounded-lg px-4 py-3 text-sm font-bold transition hover:brightness-95"
+        >
+          Email the team
+        </a>
+        <a
+          href="https://www.linkedin.com/company/virginia-legal-brief"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="border-parchment/35 text-parchment hover:border-manila hover:text-manila rounded-lg border px-4 py-3 text-sm font-bold transition"
+        >
+          Follow Virginia Legal Brief on LinkedIn
+        </a>
+        <button
+          type="button"
+          data-copy-contact
+          class="border-parchment/35 text-parchment hover:border-manila hover:text-manila rounded-lg border px-4 py-3 text-sm font-bold transition"
+        >
+          Copy email
+        </button>
+      </div>
+      <p
+        class="text-parchment/80 w-full text-xs"
+        data-contact-copy-status
+        aria-live="polite"
+      >
+      </p>
+    </section>
+
+    <div class="mt-7">
+      <AskQuestionBox />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  function initializeContactCopy() {
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-copy-contact]")
+      .forEach(button => {
+        if (button.dataset.initialized) return;
+        button.dataset.initialized = "true";
+        const status = button
+          .closest("section")
+          ?.querySelector<HTMLElement>("[data-contact-copy-status]");
+        button.addEventListener("click", async () => {
+          if (!status) return;
+          try {
+            await navigator.clipboard.writeText("virginialegalbrief@gmail.com");
+            status.textContent = "Email address copied.";
+          } catch {
+            status.textContent =
+              "Copy is unavailable in this browser. Use the Email the team link instead.";
+          }
+        });
+      });
+  }
+
+  initializeContactCopy();
+  document.addEventListener("astro:page-load", initializeContactCopy);
+</script>

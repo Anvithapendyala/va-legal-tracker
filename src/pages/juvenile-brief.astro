@@ -1,0 +1,197 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import YouDecide from "@/components/YouDecide.astro";
+import { getPostUrl } from "@/utils/getPostPaths";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+<Layout
+  title="The Juvenile Brief | Virginia Legal Brief"
+  description="Read landmark student-rights cases and decide how you would rule before seeing what the Supreme Court held."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-9 max-w-3xl sm:mb-12">
+      <p class="text-foreground text-xs font-bold tracking-[0.16em] uppercase">
+        Case files for Virginia students
+      </p>
+      <h1
+        class="font-heading text-forest mt-3 text-5xl leading-tight font-bold sm:text-6xl"
+      >
+        The Juvenile Brief
+      </h1>
+      <p
+        class="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg"
+      >
+        Make the call before the Court does. Vote on the question, then compare
+        your answer with the Court’s ruling in these juvenile justice cases.
+      </p>
+    </header>
+
+    <div class="space-y-7">
+      <YouDecide
+        caseId="jdb-page"
+        eyebrow="Case file 01 · Juvenile questioning"
+        prompt="“You’re 13. A police officer calls you out of class. Would you feel free to leave?”"
+        choices={[
+          {
+            label: "Yes — it wasn't a formal arrest",
+            value: "formal-arrest",
+          },
+          {
+            label: "No — a 13-year-old at school wouldn't feel free to leave",
+            value: "age-and-setting",
+          },
+        ]}
+        correctChoice="age-and-setting"
+        ruling="The U.S. Supreme Court ruled 5–4 that a child's age must be considered when deciding whether a reasonable person in that child's position would have felt free to leave, if the age was known or objectively apparent to the officer."
+        studentImpact="The rule applies to Virginia students. It informs whether questioning is custodial for Miranda purposes, but does not make every school interview custody or require a parent in every conversation."
+        sourceLabel="U.S. SUPREME COURT · 5TH AMEND."
+        briefingHref={getPostUrl(
+          "fifth-amendment-juvenile-miranda-rights",
+          undefined,
+          locale
+        )}
+        briefingLinkText="Read the J.D.B. case briefing"
+      />
+
+      <YouDecide
+        caseId="gault"
+        eyebrow="Case file 02 · Due process in juvenile court"
+        prompt="A 15-year-old faces a hearing that could lead to confinement. Can the court decide the case without giving notice of the charge or access to a lawyer?"
+        choices={[
+          {
+            label:
+              "Yes — juvenile court is informal, so those protections do not apply",
+            value: "informal-court",
+          },
+          {
+            label: "No — due process requires notice and counsel",
+            value: "due-process",
+          },
+        ]}
+        correctChoice="due-process"
+        ruling="In In re Gault, the Supreme Court held that due process requires important protections in juvenile delinquency proceedings that can result in confinement, including timely notice of the allegations and assistance of counsel. The Court also recognized confrontation and self-incrimination protections."
+        studentImpact="The decision applies to Virginia juvenile courts. Juvenile court is different from adult criminal court, but informality does not erase constitutional safeguards when a young person’s liberty is at stake."
+        sourceLabel="U.S. SUPREME COURT · 14TH AMEND."
+        briefingHref={getPostUrl(
+          "in-re-gault-juvenile-due-process",
+          undefined,
+          locale
+        )}
+        briefingLinkText="Read the In re Gault briefing"
+      />
+
+      <YouDecide
+        caseId="tlo"
+        eyebrow="Case file 03 · School searches"
+        prompt="A teacher smells smoke and searches a student’s purse. Must school officials have a warrant and probable cause?"
+        choices={[
+          {
+            label: "Yes — the Fourth Amendment always requires both",
+            value: "warrant-and-probable-cause",
+          },
+          {
+            label:
+              "No — a school search can be reasonable on less than probable cause",
+            value: "school-reasonableness",
+          },
+        ]}
+        correctChoice="school-reasonableness"
+        ruling="In New Jersey v. T.L.O., the Supreme Court held that public-school officials do not need a warrant or probable cause for a student search. The search must be justified at its start and reasonably related in scope to the circumstances that prompted it."
+        studentImpact="A school’s authority is not unlimited: the reason for the search, the student’s age, and how intrusive the search becomes all matter. The ruling supplies the baseline for Virginia public schools."
+        sourceLabel="U.S. SUPREME COURT · 4TH AMEND."
+        briefingHref={getPostUrl(
+          "fourth-amendment-school-searches",
+          undefined,
+          locale
+        )}
+        briefingLinkText="Read the school-search briefing"
+      />
+
+      <YouDecide
+        caseId="tinker"
+        eyebrow="Case file 04 · Student expression"
+        prompt="Students wear black armbands to protest a war. The school bans them, but points to no evidence of disruption. Can it prohibit the message?"
+        choices={[
+          {
+            label: "Yes — schools may prohibit controversial political views",
+            value: "ban-message",
+          },
+          {
+            label:
+              "Usually no — expression is protected absent a material disruption or invasion of others’ rights",
+            value: "substantial-disruption",
+          },
+        ]}
+        correctChoice="substantial-disruption"
+        ruling="In Tinker v. Des Moines, the Supreme Court held that students do not shed their constitutional rights at the schoolhouse gate. A school may restrict student expression when it can reasonably forecast a material and substantial disruption or an invasion of the rights of others; avoiding discomfort with an unpopular viewpoint is not enough."
+        studentImpact="The standard applies to public schools in Virginia. It protects many forms of student expression but is not a blanket right to disrupt class or violate valid school rules."
+        sourceLabel="U.S. SUPREME COURT · 1ST AMEND."
+        briefingHref={getPostUrl(
+          "tinker-v-des-moines-student-expression",
+          undefined,
+          locale
+        )}
+        briefingLinkText="Read the Tinker briefing"
+      />
+
+      <YouDecide
+        caseId="roper"
+        eyebrow="Case file 05 · Sentencing under age 18"
+        prompt="A person was 17 when a capital murder was committed. May the state impose the death penalty?"
+        choices={[
+          {
+            label: "Yes — the offense was serious enough",
+            value: "death-penalty-allowed",
+          },
+          {
+            label:
+              "No — the Constitution bars execution for crimes committed under 18",
+            value: "under-18-bar",
+          },
+        ]}
+        correctChoice="under-18-bar"
+        ruling="In Roper v. Simmons, the Supreme Court held that the Eighth and Fourteenth Amendments forbid the death penalty for a crime committed by a person who was under 18 at the time. The ruling concerns capital punishment; it does not itself decide every question about other juvenile sentences."
+        studentImpact="The rule applies nationwide, including Virginia. Later cases address other juvenile sentencing questions, so Roper should not be read as a general rule that every sentence for a minor is unconstitutional."
+        sourceLabel="U.S. SUPREME COURT · 8TH AMEND."
+        briefingHref={getRelativeLocaleUrl(locale, "reference/amendments")}
+        briefingLinkText="Explore the amendments guide"
+      />
+
+      <YouDecide
+        caseId="safford"
+        eyebrow="Case file 06 · Limits on school searches"
+        prompt="A 13-year-old is suspected of having ordinary pain-relief pills. Staff search her backpack, then require her to expose her underwear. Is the more intrusive search justified?"
+        choices={[
+          {
+            label:
+              "Yes — reasonable suspicion for the first search permits any follow-up",
+            value: "scope-unlimited",
+          },
+          {
+            label:
+              "No — the search’s scope must match the suspected danger and evidence",
+            value: "scope-limited",
+          },
+        ]}
+        correctChoice="scope-limited"
+        ruling="In Safford Unified School District v. Redding, the Supreme Court held that the strip search violated the Fourth Amendment. Even if the initial search of the student’s belongings was justified, officials had no reason to believe the pills were dangerous or hidden in her underwear, and the search was excessively intrusive."
+        studentImpact="The decision reinforces that school-search authority has limits. In Virginia, reasonableness depends on the justification, the suspected item, the student’s age, and the intrusiveness of the method."
+        sourceLabel="U.S. SUPREME COURT · 4TH AMEND."
+        briefingHref={getPostUrl(
+          "fourth-amendment-school-searches",
+          undefined,
+          locale
+        )}
+        briefingLinkText="Read the school-search briefing"
+      />
+    </div>
+  </main>
+  <Footer />
+</Layout>

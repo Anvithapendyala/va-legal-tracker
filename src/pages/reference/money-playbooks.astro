@@ -1,0 +1,191 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+---
+
+<Layout
+  title={`Money & Consumer Playbooks | ${config.site.title}`}
+  description="Practical guides to reading pay stubs, understanding credit-card rules for young adults, and reviewing bank and subscription charges."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-8 max-w-3xl sm:mb-10">
+      <a
+        href={getRelativeLocaleUrl(locale, "reference")}
+        class="text-forest decoration-manila text-sm font-semibold underline underline-offset-4"
+      >
+        ← Reference Library
+      </a>
+      <p class="text-forest mt-6 text-xs font-bold tracking-[0.16em] uppercase">
+        Reference guide 04
+      </p>
+      <h1 class="font-heading text-forest mt-2 text-4xl font-bold sm:text-5xl">
+        Money &amp; Consumer Playbooks
+      </h1>
+      <p class="text-muted-foreground mt-3 text-base leading-relaxed">
+        Three checklists for documents and charges young adults commonly
+        encounter. Keep the original paperwork and check the rules that apply to
+        your situation.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 gap-5 lg:grid-cols-3">
+      <article class="border-border bg-muted rounded-2xl border p-5 sm:p-6">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          Playbook 01 · Work
+        </p>
+        <h2 class="font-heading text-forest mt-3 text-2xl font-bold">
+          Reading a Pay Stub &amp; Tax Withholding
+        </h2>
+        <ol class="mt-5 space-y-4 text-sm leading-relaxed">
+          <li>
+            <span class="text-forest font-bold">1. Match the period.</span>
+            Check the start/end dates and compare the hours to your own schedule.
+          </li>
+          <li>
+            <span class="text-forest font-bold">2. Compare gross to net.</span>
+            Gross pay is before deductions; take-home pay is after taxes and other
+            listed amounts.
+          </li>
+          <li>
+            <span class="text-forest font-bold">3. Review deductions.</span>
+            Look for the amount and purpose of each deduction. Virginia law requires
+            most employers to provide a pay statement with specified earnings information.
+          </li>
+          <li>
+            <span class="text-forest font-bold"
+              >4. Treat withholding as an estimate.</span
+            >
+            Federal and Virginia withholding are prepayments, not the final tax bill.
+            A W-2 and tax return reconcile wages and taxes for the year.
+          </li>
+        </ol>
+        <a
+          href="https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-29/"
+          target="_blank"
+          rel="noreferrer"
+          class="text-forest decoration-manila mt-5 inline-block text-sm font-bold underline decoration-2 underline-offset-4"
+        >
+          Va. Code § 40.1-29 ↗
+        </a>
+      </article>
+
+      <article class="border-border bg-muted rounded-2xl border p-5 sm:p-6">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          Playbook 02 · Credit
+        </p>
+        <h2 class="font-heading text-forest mt-3 text-2xl font-bold">
+          Credit Cards &amp; the Federal CARD Act
+        </h2>
+        <ol class="mt-5 space-y-4 text-sm leading-relaxed">
+          <li>
+            <span class="text-forest font-bold"
+              >1. If under 21, check approval rules.</span
+            >
+            Issuers generally need evidence of an independent ability to make required
+            payments or a qualified co-signer age 21 or older.
+          </li>
+          <li>
+            <span class="text-forest font-bold">2. Read every fee term.</span>
+            Review APRs, annual fees, late fees, and how the issuer calculates a minimum
+            payment.
+          </li>
+          <li>
+            <span class="text-forest font-bold">3. Know the fee standard.</span>
+            Federal law requires certain penalty fees to be reasonable and proportional;
+            it is not one permanent dollar cap for every charge.
+          </li>
+          <li>
+            <span class="text-forest font-bold">4. Keep records.</span>
+            Save the application terms, statements, notices, and any communications
+            with the issuer.
+          </li>
+        </ol>
+        <a
+          href="https://www.law.cornell.edu/uscode/text/15/1637"
+          target="_blank"
+          rel="noreferrer"
+          class="text-forest decoration-manila mt-5 inline-block text-sm font-bold underline decoration-2 underline-offset-4"
+        >
+          Read 15 U.S.C. § 1637 ↗
+        </a>
+      </article>
+
+      <article class="border-border bg-muted rounded-2xl border p-5 sm:p-6">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          Playbook 03 · Banking
+        </p>
+        <h2 class="font-heading text-forest mt-3 text-2xl font-bold">
+          Bank Overdrafts, Subscriptions &amp; CFPB/FTC Protections
+        </h2>
+        <ol class="mt-5 space-y-4 text-sm leading-relaxed">
+          <li>
+            <span class="text-forest font-bold"
+              >1. Identify the transaction.</span
+            >
+            Note the date, merchant, amount, and whether it was an ATM, one-time debit,
+            recurring payment, or check.
+          </li>
+          <li>
+            <span class="text-forest font-bold">2. Check overdraft opt-in.</span
+            >
+            Regulation E generally requires affirmative opt-in before overdraft fees
+            on covered ATM and one-time debit-card transactions—not every type of
+            payment.
+          </li>
+          <li>
+            <span class="text-forest font-bold"
+              >3. Find subscription terms.</span
+            >
+            Save the sign-up screen, renewal date, total price, cancellation steps,
+            and confirmation. Rules differ by service and transaction.
+          </li>
+          <li>
+            <span class="text-forest font-bold">4. Raise a clear dispute.</span>
+            Contact the provider or bank with the records. CFPB and FTC protections
+            cover different products and conduct; the right agency depends on the
+            issue.
+          </li>
+        </ol>
+        <div class="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
+          <a
+            href="https://www.consumerfinance.gov/complaint/"
+            target="_blank"
+            rel="noreferrer"
+            class="text-forest decoration-manila underline decoration-2 underline-offset-4"
+          >
+            CFPB complaint ↗
+          </a>
+          <a
+            href="https://reportfraud.ftc.gov/"
+            target="_blank"
+            rel="noreferrer"
+            class="text-forest decoration-manila underline decoration-2 underline-offset-4"
+          >
+            FTC report ↗
+          </a>
+        </div>
+        <a
+          href="https://www.consumerfinance.gov/rules-policy/regulations/1005/17/"
+          target="_blank"
+          rel="noreferrer"
+          class="text-forest decoration-manila mt-4 inline-block text-sm font-bold underline decoration-2 underline-offset-4"
+        >
+          Regulation E § 1005.17 ↗
+        </a>
+      </article>
+    </div>
+
+    <p class="text-muted-foreground mt-5 max-w-4xl text-xs leading-relaxed">
+      These playbooks are educational and do not replace account terms,
+      personalized tax guidance, or legal advice. Keep sensitive numbers and
+      account details private when seeking help.
+    </p>
+  </main>
+  <Footer />
+</Layout>

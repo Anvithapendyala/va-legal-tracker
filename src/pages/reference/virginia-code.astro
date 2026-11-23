@@ -1,0 +1,137 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const statutes = [
+  {
+    area: "Work & Wages",
+    citation: "Va. Code § 40.1-29",
+    subject: "Paydays, wage statements, and deductions",
+    summary:
+      "Requires regular pay periods, sets payment timing and methods, and limits withholding wages without signed written authorization. Hourly employees generally must be paid at least every two weeks or twice each month, subject to statutory exceptions.",
+    href: "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-29/",
+  },
+  {
+    area: "Work & Wages",
+    citation: "Va. Code § 40.1-80.1",
+    subject: "Employment of children",
+    summary:
+      "Regulates the hours children under 16 may work and requires at least a 30-minute lunch interval after five continuous hours of work. Exceptions and additional rules may apply.",
+    href: "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-80.1/",
+  },
+  {
+    area: "Housing & Leases",
+    citation: "Va. Code § 55.1-1226",
+    subject: "Security deposits",
+    summary:
+      "Limits security deposits to two months’ periodic rent and generally requires a written itemization of deductions and any amount due within 45 days after the later of tenancy termination or move-out.",
+    href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1226/",
+  },
+  {
+    area: "Driving & Provisional Licenses",
+    citation: "Va. Code § 46.2-334.01",
+    subject: "Passenger limits and midnight–4 a.m. restrictions",
+    summary:
+      "Sets passenger and nighttime-driving restrictions for provisional license holders under 18, with exceptions including certain work and school-related trips.",
+    href: "https://law.lis.virginia.gov/vacode/title46.2/chapter3/section46.2-334.01/",
+  },
+  {
+    area: "Consumer Protection",
+    citation: "Va. Code § 59.1-200",
+    subject: "Prohibited practices in consumer transactions",
+    summary:
+      "Lists specified fraudulent, deceptive, and unfair practices involving consumer transactions. Coverage depends on the transaction, supplier, statutory exemptions, and current law; an unexpected charge alone does not establish a violation.",
+    href: "https://law.lis.virginia.gov/vacode/title59.1/chapter17.8/section59.1-200/",
+  },
+];
+---
+
+<Layout
+  title={`Virginia Code Essentials | ${config.site.title}`}
+  description="A source-linked quick reference to Virginia wage, child-labor, housing, provisional-license, and consumer-protection statutes."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-8 max-w-3xl sm:mb-10">
+      <a
+        href={getRelativeLocaleUrl(locale, "reference")}
+        class="text-forest decoration-manila text-sm font-semibold underline underline-offset-4"
+      >
+        ← Reference Library
+      </a>
+      <p class="text-forest mt-6 text-xs font-bold tracking-[0.16em] uppercase">
+        Reference guide 02
+      </p>
+      <h1 class="font-heading text-forest mt-2 text-4xl font-bold sm:text-5xl">
+        Virginia Code Essentials
+      </h1>
+      <p class="text-muted-foreground mt-3 text-base leading-relaxed">
+        A quick map to frequently referenced Virginia statutes. Open each
+        official section for its complete text, exceptions, and effective dates.
+      </p>
+    </header>
+
+    <div class="border-border overflow-x-auto rounded-2xl border">
+      <table class="w-full min-w-[46rem] border-collapse text-left">
+        <thead class="bg-forest text-parchment">
+          <tr>
+            <th scope="col" class="px-4 py-3 text-xs font-bold uppercase"
+              >Area</th
+            >
+            <th scope="col" class="px-4 py-3 text-xs font-bold uppercase"
+              >Statute</th
+            >
+            <th scope="col" class="px-4 py-3 text-xs font-bold uppercase"
+              >What it covers</th
+            >
+            <th scope="col" class="px-4 py-3 text-xs font-bold uppercase"
+              >Official text</th
+            >
+          </tr>
+        </thead>
+        <tbody class="divide-border bg-muted divide-y">
+          {
+            statutes.map(statute => (
+              <tr class="align-top">
+                <th
+                  scope="row"
+                  class="text-forest px-4 py-4 text-sm font-semibold"
+                >
+                  {statute.area}
+                </th>
+                <td class="text-forest px-4 py-4 text-sm font-bold">
+                  {statute.citation}
+                </td>
+                <td class="px-4 py-4">
+                  <p class="text-foreground font-semibold">{statute.subject}</p>
+                  <p class="text-muted-foreground mt-1 max-w-2xl text-sm leading-relaxed">
+                    {statute.summary}
+                  </p>
+                </td>
+                <td class="px-4 py-4">
+                  <a
+                    href={statute.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="text-forest decoration-manila text-sm font-bold whitespace-nowrap underline decoration-2 underline-offset-4 hover:decoration-4"
+                  >
+                    Read statute ↗
+                  </a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="text-muted-foreground mt-4 max-w-3xl text-xs leading-relaxed">
+      This index is educational, not legal advice. Laws and interpretations can
+      change; confirm the current statute before relying on a summary.
+    </p>
+  </main>
+  <Footer />
+</Layout>

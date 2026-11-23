@@ -1,37 +1,24 @@
 ---
 title: "About"
-description: "A bit about me and this blog."
+description: "About Virginia Legal Brief, its founder, and its reporting on Virginia and federal law."
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+**Virginia Legal Brief** is a nonpartisan public-interest legal research publication owned and led by **Anvitha Pendyala**, with a team of **10 interns** who publish regular legal and financial updates.
 
-![Astro Paper](@/assets/images/astropaper-og.jpg)
+## Our Mission
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+Court rulings, statutory updates, and consumer-finance rules can shape everyday rights and financial decisions, yet primary legal documents are often difficult to navigate. Virginia Legal Brief translates them into clear, source-linked explainers:
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+- **Judicial Decisions & Live Dockets:** Major rulings from the U.S. Supreme Court, the Fourth Circuit Court of Appeals, and the Supreme Court of Virginia.
+- **Constitutional Rights:** How amendments and court decisions apply in schools, workplaces, and digital spaces.
+- **Consumer Finance & Workplace Protections:** Virginia wage and housing laws, banking rules, and corporate accountability actions.
 
-## Features
+## About the Founder
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+Anvitha Pendyala is a high school senior in Loudoun County, Virginia. She founded and leads her school’s Mock Trial chapter as president. She also serves as president of both Model Congress and the debate team. As an independent legal researcher, she studies juvenile exoneration records to examine how age and interrogation length relate to false confessions.
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+Anvitha founded Virginia Legal Brief in June 2026 to help students understand how Virginia and federal law affect their everyday lives. The Rights & Wallet Checker and plain-English case briefings help readers explore questions about school, work, and money and find the court decisions and statutes behind the answers.
 
-and so much more.
+## Follow & Contact
 
-## Show your support
-
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
-
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
-
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
-
-Kyay zuu! 🙏🏼
+Follow [Virginia Legal Brief on LinkedIn](https://www.linkedin.com/company/virginia-legal-brief) for publication updates, or [email the editorial desk](mailto:virginialegalbrief@gmail.com) at virginialegalbrief@gmail.com.

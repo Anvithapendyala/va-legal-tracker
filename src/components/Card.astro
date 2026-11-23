@@ -1,31 +1,88 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import config from "@/config";
 
 type Props = {
   variant?: "h2" | "h3";
+  filterCategories?: string;
+  inGrid?: boolean;
 } & CollectionEntry<"posts">;
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const {
+  variant: Heading = "h2",
+  filterCategories = "",
+  inGrid = false,
+  id,
+  data,
+  filePath,
+} = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, sourceLabel, tags, pubDatetime, timezone } = data;
+const locale = Astro.currentLocale ?? config.site.lang;
 ---
 
-<li class="my-6">
-  <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
-    class:list={[
-      "text-accent inline-block text-lg font-medium",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
+<li
+  class:list={["h-full", { "mb-5": !inGrid }]}
+  data-post-card
+  data-filter-categories={filterCategories}
+>
+  <article
+    class="border-border bg-muted hover:border-forest flex h-full flex-col rounded-2xl border p-5 transition-colors sm:p-6"
   >
-    <Heading transition:name={toTransitionName(id)}>
-      {title}
-    </Heading>
-  </a>
-  <Datetime {...props} />
-  <p>{description}</p>
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <span
+        class="bg-forest text-parchment rounded-sm px-2.5 py-1 text-[0.65rem] font-bold tracking-wide"
+      >
+        {sourceLabel}
+      </span>
+      <Datetime
+        pubDatetime={pubDatetime}
+        timezone={timezone}
+        size="sm"
+        class="shrink-0"
+      />
+    </div>
+
+    <a
+      href={getPostUrl(id, filePath, locale)}
+      class="text-foreground decoration-manila mt-4 underline-offset-4 hover:underline focus-visible:underline"
+    >
+      <Heading
+        transition:name={toTransitionName(id)}
+        class="font-heading text-xl leading-snug font-bold sm:text-2xl"
+      >
+        {title}
+      </Heading>
+    </a>
+    <p class="text-muted-foreground mt-3 line-clamp-2 text-sm leading-relaxed">
+      {description}
+    </p>
+
+    <div class="mt-auto flex flex-wrap items-end justify-between gap-4 pt-5">
+      <ul class="flex flex-wrap gap-2" aria-label="Briefing topics">
+        {
+          tags.map(tag => (
+            <li>
+              <a
+                href={getRelativeLocaleUrl(locale, `tags/${tag}/`)}
+                class="border-border bg-background text-foreground hover:border-forest hover:text-forest inline-flex rounded-full border px-2.5 py-1 text-xs font-medium transition-colors"
+              >
+                #{tag}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href={getPostUrl(id, filePath, locale)}
+        class="text-forest decoration-manila shrink-0 text-sm font-bold underline decoration-2 underline-offset-4 hover:decoration-4"
+      >
+        Read briefing →
+      </a>
+    </div>
+  </article>
 </li>

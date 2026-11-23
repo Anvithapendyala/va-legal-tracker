@@ -1,0 +1,456 @@
+---
+type Situation =
+  | "school"
+  | "speech"
+  | "police"
+  | "paycheck"
+  | "bank"
+  | "deposit"
+  | "subscription"
+  | "driving";
+
+type Props = {
+  mode?: "home" | "full";
+};
+
+const { mode = "home" } = Astro.props;
+
+const situationLabels: Record<Situation, string> = {
+  school: "Can my school search my phone or backpack?",
+  speech: "Can I get suspended for an off-campus social media post?",
+  police: "What if a police officer questions me at school?",
+  paycheck: "Is something missing from my paycheck or break time?",
+  bank: "Why did my bank charge me an overdraft or hidden fee?",
+  deposit: "Can my landlord keep my security deposit?",
+  subscription: "Can a gym or subscription trap me in an auto-renewal?",
+  driving: "What are my rights as a teen driver in Virginia?",
+};
+
+const homeSituations: Situation[] = ["school", "paycheck", "bank", "deposit"];
+const categoryGroups: { label: string; situations: Situation[] }[] = [
+  {
+    label: "School & Youth Rights",
+    situations: ["school", "speech", "police"],
+  },
+  {
+    label: "Work, Money & Contracts",
+    situations: ["paycheck", "bank", "deposit", "subscription", "driving"],
+  },
+];
+---
+
+<section
+  class:list={[
+    "rounded-2xl p-5 shadow-xl sm:p-7",
+    mode === "full"
+      ? "border-border bg-muted text-forest border"
+      : "bg-forest text-parchment",
+  ]}
+  data-rights-checker
+  data-mode={mode}
+  aria-labelledby="question-desk-title"
+>
+  <p
+    class:list={[
+      "text-xs font-bold tracking-[0.16em] uppercase",
+      mode === "full" ? "text-stamp-red" : "text-manila",
+    ]}
+  >
+    The Question Desk
+  </p>
+  <h2
+    id="question-desk-title"
+    class:list={[
+      "mt-2 text-3xl font-bold",
+      mode === "full" ? "text-forest" : "text-parchment",
+    ]}
+  >
+    {mode === "full" ? "Choose a situation" : "What’s your question?"}
+  </h2>
+  {
+    mode === "full" ? (
+      <div class="mt-6 space-y-7">
+        {categoryGroups.map(group => (
+          <section aria-label={group.label}>
+            <h3 class="font-heading text-forest text-xl font-bold">
+              {group.label}
+            </h3>
+            <div
+              class="mt-3 grid gap-2.5 sm:grid-cols-2"
+              role="group"
+              aria-label={group.label}
+            >
+              {group.situations.map(situation => (
+                <button
+                  type="button"
+                  data-situation={situation}
+                  class="border-border bg-background text-forest hover:border-marigold rounded-xl border px-4 py-4 text-left text-sm leading-relaxed font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-base"
+                  aria-pressed="false"
+                >
+                  {situationLabels[situation]}
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    ) : (
+      <div
+        class="mt-5 grid grid-cols-2 gap-2.5"
+        role="group"
+        aria-label="Choose your question"
+      >
+        {homeSituations.map(situation => (
+          <button
+            type="button"
+            data-situation={situation}
+            class="border-parchment/20 text-parchment hover:border-manila hover:bg-parchment/5 rounded-xl border px-3 py-3.5 text-left text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 sm:text-sm"
+            aria-pressed="false"
+          >
+            {situation === "school"
+              ? "Can my school search my phone?"
+              : situation === "paycheck"
+                ? "Is something missing from my paycheck?"
+                : situation === "bank"
+                  ? "Why did my bank charge me a fee?"
+                  : "Can my landlord keep my deposit?"}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  <div
+    data-questions
+    class:list={[
+      "mt-5 rounded-xl border p-4 sm:p-5",
+      mode === "full"
+        ? "border-border bg-background text-forest"
+        : "border-parchment/20 bg-parchment/5",
+    ]}
+    hidden
+  >
+  </div>
+  <div
+    data-result
+    class="border-manila/60 bg-parchment text-forest mt-5 rounded-xl border p-4 sm:p-5"
+    aria-live="polite"
+    hidden
+  >
+  </div>
+</section>
+
+<script>
+  type Situation =
+    | "school"
+    | "speech"
+    | "police"
+    | "paycheck"
+    | "bank"
+    | "deposit"
+    | "subscription"
+    | "driving";
+
+  type Result = {
+    law: string;
+    explanation: string;
+    href: string;
+    linkText: string;
+  };
+
+  const situations: Record<
+    Situation,
+    {
+      questions: [string, string];
+      getResult: (answers: string[]) => Result;
+    }
+  > = {
+    school: {
+      questions: [
+        "Did a public-school employee conduct the search, or was it done at the school's direction?",
+        "Before searching, did the official have a specific, reasonable basis to suspect a school-rule or safety issue?",
+      ],
+      getResult: answers => ({
+        law: "U.S. FOURTH AMENDMENT · NEW JERSEY v. T.L.O.",
+        explanation:
+          answers[0] !== "yes"
+            ? "The Fourth Amendment generally limits government action. A private-school search may be governed by different rules, school policies, or other law. Ask what policy applies and preserve the details of the search."
+            : answers[1] === "yes"
+              ? "New Jersey v. T.L.O. allows public-school officials to search based on reasonable suspicion rather than a warrant or probable cause. The search must be justified at its start and reasonably related in scope. A phone can hold extensive private information, and T.L.O. did not approve every phone search; what officials sought and how far they looked matter."
+              : "Without a specific, reasonable basis, a public-school search may not satisfy T.L.O. The reason for the search and its scope both matter; save the school policy and write down what officials said they were looking for.",
+        href: "/posts/fourth-amendment-school-searches/",
+        linkText: "Read the school-search briefing",
+      }),
+    },
+    speech: {
+      questions: [
+        "Was the post made off campus and outside a school-sponsored activity?",
+        "Did it involve a true threat, targeted serious harassment, or a substantial disruption at school?",
+      ],
+      getResult: answers => ({
+        law: "U.S. FIRST AMENDMENT · MAHANOY AREA SCHOOL DISTRICT v. B.L.",
+        explanation:
+          answers[0] === "yes" && answers[1] === "no"
+            ? "Mahanoy recognizes that public schools have less authority over off-campus expression, while leaving room to address serious threats, bullying, or substantial disruption. The full context matters; keep the post and the school's explanation for discipline."
+            : "Mahanoy gives off-campus student speech meaningful protection, but it does not bar every school response. Public-school authority depends on where and how the speech occurred, its connection to school, and its effects; threats and serious harassment can change the analysis.",
+        href: "/posts/mahanoy-student-speech-1st-amendment/",
+        linkText: "Read the Mahanoy student-speech briefing",
+      }),
+    },
+    police: {
+      questions: [
+        "Were you questioned by police, or by school staff acting for law enforcement?",
+        "Considering your age and the setting, would a reasonable child in your position feel free to leave?",
+      ],
+      getResult: answers => ({
+        law: "U.S. FIFTH AMENDMENT · J.D.B. v. NORTH CAROLINA",
+        explanation:
+          answers[0] === "yes" && answers[1] === "no"
+            ? "J.D.B. requires a child's age to be considered in the Miranda-custody analysis when it was known or objectively apparent to the officer. Miranda warnings are required before custodial interrogation; whether questioning was custody depends on all the circumstances."
+            : "A conversation at school is not automatically a custodial interrogation. J.D.B. says age matters when deciding whether a reasonable child would feel free to leave, but Miranda applies to custodial questioning by law enforcement—not every conversation with school staff.",
+        href: "/posts/fifth-amendment-juvenile-miranda-rights/",
+        linkText: "Read the J.D.B. juvenile-rights briefing",
+      }),
+    },
+    paycheck: {
+      questions: [
+        "Are wages missing, late, or reduced for time you worked?",
+        "Are you under 18 and working more than five hours continuously without a 30-minute lunch period?",
+      ],
+      getResult: answers => ({
+        law: "VA. CODE §§ 40.1-29, 40.1-80.1",
+        explanation:
+          answers[0] === "yes" && answers[1] === "yes"
+            ? "Virginia law requires timely wage payment and a lunch interval for covered youth after five continuous hours. A court finding of a knowing failure to pay can trigger treble damages under § 40.1-29. A limited good-faith defense may apply to qualifying claims if the employer meets the statutory test and pays the wages within 14 days after notice."
+            : answers[0] === "yes"
+              ? "Va. Code § 40.1-29 requires regular wage payment and written earnings information, and permits recovery of unpaid wages. A court finding of a knowing failure can trigger treble damages; a limited good-faith defense may apply to qualifying claims if the employer meets the statutory test and pays within 14 days after notice. Save your pay stubs and time records."
+              : answers[1] === "yes"
+                ? "Va. Code § 40.1-80.1 generally bars a child from working more than five continuous hours without at least a 30-minute lunch period. The precise child-labor rules and exceptions depend on the job and age."
+                : "These answers do not identify a missing-wage or youth-break issue, but other wage rules may still apply. Compare your hours, rate, deductions, and gross pay on each statement.",
+        href: "/posts/virginia-teen-wage-rights/",
+        linkText: "Read the Virginia paycheck briefing",
+      }),
+    },
+    bank: {
+      questions: [
+        "Was the fee for an ATM withdrawal or one-time debit-card purchase?",
+        "Did you affirmatively opt in to overdraft coverage for those transactions?",
+      ],
+      getResult: answers => ({
+        law: "12 C.F.R. § 1005.17 · VA. CODE § 59.1-200",
+        explanation:
+          answers[0] === "yes" && answers[1] === "no"
+            ? "For covered accounts, Regulation E generally bars an overdraft fee on an ATM or one-time debit-card transaction unless you opted in. It does not cover every transaction or every bank fee. The Virginia Consumer Protection Act also addresses specified deceptive practices, subject to statutory exemptions."
+            : "Federal overdraft protections depend on the transaction and your opt-in choice. The Virginia Consumer Protection Act, Va. Code § 59.1-200, addresses specified deceptive practices, though exemptions may apply to some financial institutions. Keep the account terms and fee notice.",
+        href: "/posts/cfpb-hidden-bank-fees-tracker/",
+        linkText: "Read the bank-fees briefing",
+      }),
+    },
+    deposit: {
+      questions: [
+        "Have 45 days passed since the later of your tenancy ending or moving out?",
+        "Did your landlord provide a written, itemized list of deductions or a deposit accounting?",
+      ],
+      getResult: answers => ({
+        law: "VA. CODE § 55.1-1226 · VIRGINIA RESIDENTIAL LANDLORD AND TENANT ACT",
+        explanation:
+          answers[0] === "yes" && answers[1] !== "yes"
+            ? "For covered tenancies, the landlord generally must return the deposit or send a written, itemized accounting within 45 days after the later of the tenancy ending or your move-out. If that deadline passed without an accounting, save your lease, move-out records, and forwarding-address notice."
+            : "Virginia generally requires return of the deposit or an itemized accounting within 45 days after the later of the tenancy ending or move-out. The exact amount and permitted deductions depend on the lease, the condition of the unit, and statutory exceptions.",
+        href: "/posts/virginia-security-deposit-tenant-rights/",
+        linkText: "Read the security-deposit briefing",
+      }),
+    },
+    subscription: {
+      questions: [
+        "Is this a Virginia gym or fitness-club membership?",
+        "Did you follow the contract's cancellation instructions and keep proof of your notice?",
+      ],
+      getResult: answers => ({
+        law: "VA. CODE § 59.1-297 · ROSCA, 15 U.S.C. § 8403 · FTC ACT",
+        explanation:
+          answers[0] === "yes"
+            ? "Virginia's Health Club Act provides a three-business-day cancellation period and other specific rights, with written-notice requirements. For online subscriptions, ROSCA covers certain negative-option plans. The FTC's broader 2024 Click-to-Cancel rule was vacated in 2025, so do not assume that rule is currently in force; deceptive enrollment or cancellation practices may still raise FTC Act issues."
+            : "Check the renewal and cancellation terms, save the signup disclosures, and keep proof of your cancellation request. The FTC's 2024 Click-to-Cancel rule was vacated in 2025; ROSCA still applies to certain online negative-option plans, and the FTC Act can address deceptive practices. Virginia's Health Club Act applies to covered gym contracts.",
+        href: "/posts/virginia-health-spa-gym-cancellation-law/",
+        linkText: "Read the Virginia gym-cancellation briefing",
+      }),
+    },
+    driving: {
+      questions: [
+        "Are you under 18 and driving with a Virginia provisional license?",
+        "Does the trip involve midnight–4 a.m. driving or more than one under-21 passenger without a listed exception?",
+      ],
+      getResult: answers => ({
+        law: "VA. CODE § 46.2-334.01",
+        explanation:
+          answers[0] === "yes" && answers[1] === "yes"
+            ? "Virginia generally limits provisional drivers under 18 to one passenger under 21 and restricts driving from midnight to 4 a.m. The statute has exceptions, including certain work and school trips, qualifying adult supervision, family passengers, and emergencies; check the exact conditions before driving."
+            : "Va. Code § 46.2-334.01 sets passenger and midnight–4 a.m. limits for provisional drivers under 18, with exceptions for specified work or school travel, qualifying adult supervision, family members, and emergencies. Review the statute and your license conditions.",
+        href: "/posts/virginia-minors-driving-curfew-laws/",
+        linkText: "Read the Virginia teen-driver briefing",
+      }),
+    },
+  };
+
+  function initializeQuestionDesks() {
+    document
+      .querySelectorAll<HTMLElement>("[data-rights-checker]")
+      .forEach(root => {
+        if (root.dataset.initialized) return;
+        root.dataset.initialized = "true";
+
+        const questionsPanel =
+          root.querySelector<HTMLDivElement>("[data-questions]");
+        const resultPanel = root.querySelector<HTMLDivElement>("[data-result]");
+        if (!questionsPanel || !resultPanel) return;
+
+        let selectedSituation: Situation | undefined;
+        let activeQuestion = 0;
+        const answers = ["", ""];
+
+        const makeElement = <K extends keyof HTMLElementTagNameMap>(
+          tag: K,
+          className: string,
+          text?: string
+        ) => {
+          const element = document.createElement(tag);
+          element.className = className;
+          if (text) element.textContent = text;
+          return element;
+        };
+
+        const renderQuestion = (questionIndex: number) => {
+          if (!selectedSituation) return;
+          activeQuestion = questionIndex;
+          questionsPanel.replaceChildren();
+
+          const lightMode = root.dataset.mode === "full";
+          const label = makeElement(
+            "p",
+            `text-xs font-bold tracking-[0.14em] ${lightMode ? "text-stamp-red" : "text-manila"} uppercase`,
+            `Step ${questionIndex + 1} of 2`
+          );
+          const prompt = makeElement(
+            "h3",
+            "mt-2 text-lg font-bold leading-snug",
+            situations[selectedSituation].questions[questionIndex]
+          );
+          const choices = makeElement("div", "mt-4 grid grid-cols-2 gap-2");
+          const answerButtonClass = lightMode
+            ? "border-border bg-muted text-forest"
+            : "border-parchment/25 text-parchment";
+
+          for (const answer of ["yes", "no"]) {
+            const button = makeElement(
+              "button",
+              `rounded-lg border px-4 py-3 text-sm font-semibold transition hover:border-manila focus-visible:outline-2 focus-visible:outline-offset-2 ${answerButtonClass}`,
+              answer === "yes" ? "Yes" : "No"
+            );
+            button.type = "button";
+            button.dataset.answer = answer;
+            button.setAttribute("aria-pressed", "false");
+            choices.append(button);
+          }
+
+          questionsPanel.append(label, prompt, choices);
+          questionsPanel.hidden = false;
+          resultPanel.hidden = true;
+          resultPanel.replaceChildren();
+        };
+
+        const renderResult = (result: Result) => {
+          questionsPanel.hidden = true;
+          resultPanel.hidden = false;
+          resultPanel.replaceChildren();
+
+          const heading = makeElement(
+            "h3",
+            "font-heading text-2xl font-bold",
+            "Your Legal & Financial Leverage"
+          );
+          const law = makeElement(
+            "p",
+            "mt-3 text-xs font-bold tracking-[0.12em] text-stamp-red uppercase",
+            result.law
+          );
+          const explanation = makeElement(
+            "p",
+            "mt-2 text-sm leading-relaxed",
+            result.explanation
+          );
+          const link = makeElement(
+            "a",
+            "mt-4 inline-flex rounded-lg bg-marigold px-4 py-3 text-sm font-bold text-forest transition hover:brightness-95",
+            result.linkText
+          );
+          link.href = result.href;
+          resultPanel.append(heading, law, explanation, link);
+        };
+
+        const isSituation = (key: string | undefined): key is Situation =>
+          key === "school" ||
+          key === "speech" ||
+          key === "police" ||
+          key === "paycheck" ||
+          key === "bank" ||
+          key === "deposit" ||
+          key === "subscription" ||
+          key === "driving";
+
+        root
+          .querySelectorAll<HTMLButtonElement>("[data-situation]")
+          .forEach(button => {
+            button.addEventListener("click", () => {
+              const key = button.dataset.situation;
+              if (!isSituation(key)) return;
+
+              selectedSituation = key;
+              answers[0] = "";
+              answers[1] = "";
+              resultPanel.hidden = true;
+              root
+                .querySelectorAll<HTMLButtonElement>("[data-situation]")
+                .forEach(option => {
+                  const selected = option === button;
+                  option.setAttribute("aria-pressed", String(selected));
+                  option.classList.toggle("border-marigold", selected);
+                  option.classList.toggle("bg-marigold", selected);
+                  option.classList.toggle(
+                    "text-forest",
+                    selected || root.dataset.mode === "full"
+                  );
+                  option.classList.toggle(
+                    "text-parchment",
+                    !selected && root.dataset.mode !== "full"
+                  );
+                  option.classList.toggle("hover:bg-marigold", selected);
+                });
+              renderQuestion(0);
+            });
+          });
+
+        questionsPanel.addEventListener("click", event => {
+          if (!(event.target instanceof Element) || !selectedSituation) return;
+          const button =
+            event.target.closest<HTMLButtonElement>("[data-answer]");
+          if (!button?.dataset.answer) return;
+
+          answers[activeQuestion] = button.dataset.answer;
+          button.setAttribute("aria-pressed", "true");
+          button.classList.add("border-marigold", "bg-marigold", "text-forest");
+          button.classList.remove("text-parchment");
+
+          if (activeQuestion === 0) {
+            renderQuestion(1);
+            return;
+          }
+
+          renderResult(situations[selectedSituation].getResult(answers));
+        });
+      });
+  }
+
+  initializeQuestionDesks();
+  document.addEventListener("astro:page-load", initializeQuestionDesks);
+</script>

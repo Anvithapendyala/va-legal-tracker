@@ -1,0 +1,200 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const amendments = [
+  {
+    number: "1st",
+    title: "Expression, religion, press, assembly, and petition",
+    meaning:
+      "Government generally cannot punish protected expression just because it is unpopular. Public-school rules may address substantial disruption, threats, or other recognized limits; the facts and setting matter.",
+    applies: [
+      "Public school",
+      "Government action",
+      "Off-campus and online speech",
+    ],
+    cases: [
+      {
+        name: "Tinker v. Des Moines",
+        slug: "tinker-v-des-moines-student-expression",
+      },
+      {
+        name: "Mahanoy Area School District v. B.L.",
+        slug: "mahanoy-student-speech-1st-amendment",
+      },
+    ],
+  },
+  {
+    number: "4th",
+    title: "Searches and seizures",
+    meaning:
+      "The Fourth Amendment limits unreasonable government searches and seizures. Public-school officials use a reasonableness standard that differs from the warrant rules generally applied to police searches.",
+    applies: [
+      "Police stops and searches",
+      "Public school",
+      "Government action",
+    ],
+    cases: [
+      {
+        name: "New Jersey v. T.L.O.",
+        slug: "fourth-amendment-school-searches",
+      },
+    ],
+  },
+  {
+    number: "5th",
+    title: "Self-incrimination and criminal procedure",
+    meaning:
+      "The Fifth Amendment protects against compelled self-incrimination in criminal cases. Miranda warnings generally apply before custodial interrogation; whether a person is in custody depends on the circumstances.",
+    applies: [
+      "Police questioning",
+      "Criminal proceedings",
+      "Juvenile interviews",
+    ],
+    cases: [
+      {
+        name: "J.D.B. v. North Carolina",
+        slug: "fifth-amendment-juvenile-miranda-rights",
+      },
+    ],
+  },
+  {
+    number: "6th",
+    title: "Rights of people accused in criminal prosecutions",
+    meaning:
+      "The Sixth Amendment protects rights such as counsel, a speedy and public trial, an impartial jury, notice of charges, and confronting witnesses in criminal prosecutions. In juvenile delinquency cases, In re Gault recognized counsel and related protections through Fourteenth Amendment due process.",
+    applies: [
+      "Adult criminal court",
+      "Juvenile court (through due process)",
+      "Counsel and witnesses",
+    ],
+    cases: [
+      {
+        name: "In re Gault (juvenile due process)",
+        slug: "in-re-gault-juvenile-due-process",
+      },
+    ],
+  },
+  {
+    number: "8th",
+    title: "Bail, fines, and punishment",
+    meaning:
+      "The Eighth Amendment bars excessive bail and fines and cruel and unusual punishments. Its application depends on the punishment and context; youth sentencing has additional constitutional limits.",
+    applies: ["Criminal sentencing", "Bail and fines", "Youth punishment"],
+    cases: [
+      {
+        name: "Browse the Law Tracker for related case briefings",
+        slug: null,
+      },
+    ],
+  },
+  {
+    number: "14th",
+    title: "Due process and equal protection by states",
+    meaning:
+      "The Fourteenth Amendment binds state and local government to due process and equal protection. It is central to constitutional claims involving public schools, police, and state juvenile courts.",
+    applies: ["Public school", "Juvenile court", "State and local government"],
+    cases: [
+      {
+        name: "In re Gault",
+        slug: "in-re-gault-juvenile-due-process",
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title={`Constitutional Amendments Guide | ${config.site.title}`}
+  description="A plain-English guide to the First, Fourth, Fifth, Sixth, Eighth, and Fourteenth Amendments and where they apply."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-8 max-w-3xl sm:mb-10">
+      <a
+        href={getRelativeLocaleUrl(locale, "reference")}
+        class="text-forest decoration-manila text-sm font-semibold underline underline-offset-4"
+      >
+        ← Reference Library
+      </a>
+      <p class="text-forest mt-6 text-xs font-bold tracking-[0.16em] uppercase">
+        Reference guide 01
+      </p>
+      <h1 class="font-heading text-forest mt-2 text-4xl font-bold sm:text-5xl">
+        Constitutional Amendments Guide
+      </h1>
+      <p class="text-muted-foreground mt-3 text-base leading-relaxed">
+        Constitutional rights often turn on who acted, where it happened, and
+        what the government did. These summaries are starting points, not
+        case-specific legal advice.
+      </p>
+    </header>
+
+    <section
+      class="grid grid-cols-1 gap-5 md:grid-cols-2"
+      aria-label="Amendment summaries"
+    >
+      {
+        amendments.map(amendment => (
+          <article class="border-border bg-muted rounded-2xl border p-5 sm:p-6">
+            <div class="flex items-start gap-4">
+              <span class="bg-forest font-heading text-parchment grid size-12 shrink-0 place-items-center rounded-xl text-xl font-bold">
+                {amendment.number}
+              </span>
+              <div>
+                <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+                  Amendment
+                </p>
+                <h2 class="font-heading text-forest mt-1 text-xl font-bold sm:text-2xl">
+                  {amendment.title}
+                </h2>
+              </div>
+            </div>
+            <p class="text-foreground mt-4 text-sm leading-relaxed">
+              {amendment.meaning}
+            </p>
+            <div class="mt-4">
+              <h3 class="text-forest text-xs font-bold tracking-wide uppercase">
+                Where it applies
+              </h3>
+              <ul class="mt-2 flex flex-wrap gap-2">
+                {amendment.applies.map(context => (
+                  <li class="border-border bg-background text-foreground rounded-full border px-3 py-1 text-xs font-medium">
+                    {context}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="border-border mt-5 border-t pt-4">
+              <h3 class="text-forest text-xs font-bold tracking-wide uppercase">
+                Landmark case briefings
+              </h3>
+              <ul class="mt-2 space-y-2">
+                {amendment.cases.map(caseItem => (
+                  <li>
+                    <a
+                      href={
+                        caseItem.slug
+                          ? getPostUrl(caseItem.slug, undefined, locale)
+                          : getRelativeLocaleUrl(locale, "posts")
+                      }
+                      class="text-forest decoration-manila text-sm font-semibold underline underline-offset-4 hover:decoration-2"
+                    >
+                      {caseItem.name} →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,1105 @@
+<section
+  class="space-y-6"
+  data-document-decoder
+  aria-label="Interactive document decoder"
+>
+  <div
+    class="grid grid-cols-2 gap-2 lg:grid-cols-4"
+    role="tablist"
+    aria-label="Choose a document"
+  >
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-job"
+      aria-controls="document-panel-job"
+      aria-selected="true"
+      data-document-tab="job"
+      class="bg-marigold text-forest rounded-full px-4 py-2.5 text-sm font-bold"
+    >
+      Job offer &amp; onboarding
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-lease"
+      aria-controls="document-panel-lease"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="lease"
+      class="border-border text-foreground rounded-full border px-4 py-2.5 text-sm font-bold"
+    >
+      Apartment lease
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-bank"
+      aria-controls="document-panel-bank"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="bank"
+      class="border-border text-foreground rounded-full border px-4 py-2.5 text-sm font-bold"
+    >
+      Bank &amp; app terms
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-gym"
+      aria-controls="document-panel-gym"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="gym"
+      class="border-border text-foreground rounded-full border px-3 py-2.5 text-xs font-bold sm:px-4 sm:text-sm"
+    >
+      Gym membership
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-bnpl"
+      aria-controls="document-panel-bnpl"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="bnpl"
+      class="border-border text-foreground rounded-full border px-3 py-2.5 text-xs font-bold sm:px-4 sm:text-sm"
+    >
+      Buy now, pay later
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-card"
+      aria-controls="document-panel-card"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="card"
+      class="border-border text-foreground rounded-full border px-3 py-2.5 text-xs font-bold sm:px-4 sm:text-sm"
+    >
+      Student credit card
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-sublease"
+      aria-controls="document-panel-sublease"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="sublease"
+      class="border-border text-foreground rounded-full border px-3 py-2.5 text-xs font-bold sm:px-4 sm:text-sm"
+    >
+      Dorm &amp; sublease
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="document-tab-privacy"
+      aria-controls="document-panel-privacy"
+      aria-selected="false"
+      tabindex="-1"
+      data-document-tab="privacy"
+      class="border-border text-foreground rounded-full border px-3 py-2.5 text-xs font-bold sm:px-4 sm:text-sm"
+    >
+      Social &amp; app privacy
+    </button>
+  </div>
+
+  <div class="grid items-start gap-5 lg:grid-cols-2 lg:gap-7">
+    <article
+      id="document-panel-job"
+      role="tabpanel"
+      aria-labelledby="document-tab-job"
+      data-document-panel="job"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Employment packet · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">Offer of Employment</h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          Please review these terms before accepting. Select a highlighted
+          clause to see a plain-English explanation.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Employment status.</span>
+            <button
+              type="button"
+              data-clause="job-atwill"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Employment is at will
+            </button>
+            unless a written agreement or law provides otherwise.
+          </p>
+          <p>
+            <span class="font-semibold">2. Time and overtime.</span>
+            <button
+              type="button"
+              data-clause="job-overtime"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Employee waives overtime and agrees all duties are completed off
+              the clock.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. Uniform and tips.</span>
+            <button
+              type="button"
+              data-clause="job-deductions"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Uniform costs and tip-pool adjustments may be deducted from wages.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not an actual employment offer.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-lease"
+      role="tabpanel"
+      aria-labelledby="document-tab-lease"
+      data-document-panel="lease"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Residential lease · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">Lease Terms &amp; Addendum</h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          Select a highlighted lease term to understand what to check before
+          signing.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Security deposit.</span>
+            <button
+              type="button"
+              data-clause="lease-deposit"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Deposit accounting will be provided after move-out.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Renewal.</span>
+            <button
+              type="button"
+              data-clause="lease-renewal"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              This lease renews automatically unless notice is delivered by the
+              stated deadline.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. Co-tenants.</span>
+            <button
+              type="button"
+              data-clause="lease-liability"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Each tenant may be responsible for the full rent and other lease
+              obligations.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not an actual lease.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-bank"
+      role="tabpanel"
+      aria-labelledby="document-tab-bank"
+      data-document-panel="bank"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Account terms · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">Digital Banking Agreement</h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          Select a highlighted term to learn what the agreement may mean in
+          practice.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Disputes.</span>
+            <button
+              type="button"
+              data-clause="bank-arbitration"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Covered disputes must be resolved through individual arbitration.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Opt out.</span>
+            <button
+              type="button"
+              data-clause="bank-optout"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              You may reject arbitration by following the instructions within 30
+              days.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. Overdrafts.</span>
+            <button
+              type="button"
+              data-clause="bank-overdraft"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              A negative balance may trigger fees under the account terms.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not actual bank terms.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-gym"
+      role="tabpanel"
+      aria-labelledby="document-tab-gym"
+      data-document-panel="gym"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Health club contract · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">
+              Gym &amp; Fitness Membership Contract
+            </h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          Select a highlighted membership term to see the cancellation rules
+          Virginia law actually provides.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Renewal.</span>
+            <button
+              type="button"
+              data-clause="gym-renewal"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              This membership renews automatically unless notice is received by
+              the date stated in the agreement.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Cancellation notice.</span>
+            <button
+              type="button"
+              data-clause="gym-30day"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              A qualifying cancellation must be sent in writing; any refund
+              required by law is due within 30 days.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. Early termination.</span>
+            <button
+              type="button"
+              data-clause="gym-fee"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              An early termination charge may apply, subject to any statutory
+              right to cancel.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not an actual gym contract.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-bnpl"
+      role="tabpanel"
+      aria-labelledby="document-tab-bnpl"
+      data-document-panel="bnpl"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Installment plan · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">Pay-in-Four Terms</h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          BNPL rules have changed. Select a clause to separate the contract
+          terms from federal protections.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Late payment.</span>
+            <button
+              type="button"
+              data-clause="bnpl-late"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              A missed installment may trigger a late fee under the plan terms.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Autopay.</span>
+            <button
+              type="button"
+              data-clause="bnpl-autopay"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Scheduled withdrawals may be submitted even when your bank balance
+              is low.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">
+              3. Limited credit reporting and dispute protections.
+            </span>
+            <button
+              type="button"
+              data-clause="bnpl-disputes"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Refund and dispute rights depend on applicable law and the
+              provider’s terms.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not actual BNPL terms.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-card"
+      role="tabpanel"
+      aria-labelledby="document-tab-card"
+      data-document-panel="card"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Cardmember agreement · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">Student Credit Card Terms</h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          For applicants under 21, the CARD Act has additional application
+          rules. Select a highlighted term to learn more.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Variable and penalty APR.</span>
+            <button
+              type="button"
+              data-clause="card-apr"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Your variable APR may change with its index; a penalty APR may
+              follow a late payment.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Fees.</span>
+            <button
+              type="button"
+              data-clause="card-fees"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Late fees are subject to federal limits, and an over-limit fee
+              generally requires your opt-in.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. Minimum payment.</span>
+            <button
+              type="button"
+              data-clause="card-minimum"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Paying only the minimum can make repayment take longer and cost
+              more interest.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not an actual credit-card
+          agreement.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-sublease"
+      role="tabpanel"
+      aria-labelledby="document-tab-sublease"
+      data-document-panel="sublease"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Housing agreement · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">Dorm &amp; Sublease Addendum</h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          A sublease does not automatically release the original tenant from the
+          master lease. Check both agreements.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Responsibility.</span>
+            <button
+              type="button"
+              data-clause="sublease-liability"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              The original tenant remains responsible for rent and lease
+              obligations unless the landlord agrees otherwise in writing.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Move-in condition.</span>
+            <button
+              type="button"
+              data-clause="sublease-walkthrough"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Record existing damage and take dated photos before moving in.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. Landlord approval.</span>
+            <button
+              type="button"
+              data-clause="sublease-consent"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              If the lease gives the landlord approval rights, submit the
+              prospective subtenant’s written application.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not an actual sublease.
+        </p>
+      </div>
+    </article>
+
+    <article
+      id="document-panel-privacy"
+      role="tabpanel"
+      aria-labelledby="document-tab-privacy"
+      data-document-panel="privacy"
+      class="border-border bg-muted rounded-2xl border p-3 sm:p-5"
+      hidden
+    >
+      <div
+        class="border-border bg-background rounded-xl border p-5 shadow-sm sm:p-7"
+      >
+        <div
+          class="border-border flex items-start justify-between gap-4 border-b pb-4"
+        >
+          <div>
+            <p
+              class="text-stamp-red text-[0.65rem] font-bold tracking-[0.16em] uppercase"
+            >
+              Platform terms · sample
+            </p>
+            <h2 class="mt-2 text-xl font-bold">
+              Social Media &amp; Mobile App Privacy Policy
+            </h2>
+          </div>
+          <span
+            class="border-border text-muted-foreground rounded border px-2 py-1 text-[0.65rem] font-semibold"
+          >
+            REVIEW COPY
+          </span>
+        </div>
+        <p class="text-muted-foreground mt-5 text-sm leading-relaxed">
+          App terms differ. Read the current privacy notice and terms together,
+          especially when the service updates them.
+        </p>
+        <div class="mt-5 space-y-4 text-sm leading-relaxed">
+          <p>
+            <span class="font-semibold">1. Disputes.</span>
+            <button
+              type="button"
+              data-clause="privacy-arbitration"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Covered disputes may be sent to individual arbitration, subject to
+              the agreement and applicable law.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">2. Data sharing.</span>
+            <button
+              type="button"
+              data-clause="privacy-sharing"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              Account and device data may be shared with service providers or
+              other partners as described in the privacy notice.
+            </button>
+          </p>
+          <p>
+            <span class="font-semibold">3. User content.</span>
+            <button
+              type="button"
+              data-clause="privacy-license"
+              aria-pressed="false"
+              class="clause-highlight"
+            >
+              You grant the platform a license to use content you post while you
+              retain ownership.
+            </button>
+          </p>
+        </div>
+        <p
+          class="border-border text-muted-foreground mt-6 border-t pt-4 text-xs"
+        >
+          Sample language for education only—not actual platform terms.
+        </p>
+      </div>
+    </article>
+
+    <aside
+      class="border-border bg-background rounded-2xl border p-5 sm:p-7"
+      aria-live="polite"
+      aria-labelledby="clause-explanation-title"
+      data-clause-detail
+    >
+      <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+        The plain-English read
+      </p>
+      <h2
+        id="clause-explanation-title"
+        data-clause-explanation-title
+        class="mt-3 text-2xl font-bold"
+      >
+        What This Actually Means
+      </h2>
+      <p
+        class="text-muted-foreground mt-3 text-sm leading-relaxed"
+        data-detail-copy
+      >
+        Choose a highlighted clause in the document to see what it may mean and
+        which law or contract term to check.
+      </p>
+      <p
+        class="text-stamp-red mt-5 text-xs font-bold tracking-wide"
+        data-detail-source
+      >
+      </p>
+      <a
+        class="text-forest decoration-manila mt-4 inline-flex text-sm font-bold underline decoration-2 underline-offset-4"
+        data-detail-link
+        href="https://law.lis.virginia.gov/"
+        target="_blank"
+        rel="noreferrer"
+        hidden></a>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .clause-highlight {
+    border-radius: 0.25rem;
+    background: color-mix(in srgb, var(--manila) 34%, transparent);
+    color: var(--foreground);
+    font-weight: 700;
+    padding: 0.1rem 0.25rem;
+    text-decoration: underline;
+    text-decoration-color: var(--stamp-red);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .clause-highlight:hover,
+  .clause-highlight[aria-pressed="true"] {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  .clause-highlight:focus-visible {
+    outline: 2px dashed var(--foreground);
+    outline-offset: 3px;
+  }
+</style>
+
+<script>
+  const clauseDetails: Record<
+    string,
+    {
+      title: string;
+      source: string;
+      explanation: string;
+      href: string;
+      link: string;
+    }
+  > = {
+    "job-atwill": {
+      title: "At-will employment",
+      source: "VIRGINIA EMPLOYMENT LAW · WAGE RULES ARE SEPARATE",
+      explanation:
+        "At-will employment generally means either side may end the job, subject to exceptions such as unlawful discrimination, retaliation, or an enforceable contract. It does not erase the right to be paid for compensable work. Va. Code § 40.1-29 addresses wage payment, not the at-will rule.",
+      href: "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-29/",
+      link: "Read Va. Code § 40.1-29",
+    },
+    "job-overtime": {
+      title: "Off-the-clock work and overtime",
+      source: "VA CODE § 40.1-29 · FEDERAL FLSA",
+      explanation:
+        "A form cannot waive pay required by law for compensable hours. Required tasks before clock-in or after clock-out may count as work; covered nonexempt employees generally must receive overtime for hours over 40 in a workweek. Keep time records and pay stubs.",
+      href: "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-29/",
+      link: "Read the Virginia wage-payment statute",
+    },
+    "job-deductions": {
+      title: "Tip pooling and uniform deductions",
+      source: "VA CODE § 40.1-29 · FEDERAL FLSA RULES",
+      explanation:
+        "A signature does not automatically make every deduction lawful. Virginia law limits wage deductions, while federal rules restrict shifting business costs that cut into minimum wage or overtime and set conditions for tip pools. Ask for the written policy and keep each pay statement.",
+      href: "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-29/",
+      link: "Read the Virginia wage-payment statute",
+    },
+    "lease-deposit": {
+      title: "The 45-day security-deposit rule",
+      source: "VA CODE § 55.1-1226",
+      explanation:
+        "For covered tenancies, the landlord generally must return the deposit or provide a written, itemized list of deductions within 45 days after the tenancy ends or the tenant vacates, whichever occurs later. The statute includes conditions and exceptions, so keep move-out records and your forwarding address.",
+      href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1226/",
+      link: "Read Va. Code § 55.1-1226",
+    },
+    "lease-renewal": {
+      title: "Automatic renewal and notice",
+      source: "VA CODE § 55.1-1204 · READ THE LEASE DEADLINE",
+      explanation:
+        "An automatic-renewal clause can extend a lease unless notice is given in the way and by the deadline stated in the agreement. Virginia law addresses renewal terms and requires certain larger landlords to give 60 days’ notice of rent increases or nonrenewal in specified situations. Check the actual lease and applicable statute.",
+      href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1204/",
+      link: "Read Va. Code § 55.1-1204",
+    },
+    "lease-liability": {
+      title: "Joint and several liability",
+      source: "LEASE TERMS · VIRGINIA CONTRACT LAW",
+      explanation:
+        "When a lease makes co-tenants jointly and severally liable, a landlord may be able to seek the full unpaid obligation from any one tenant—not only that person’s share. The exact result depends on the signed agreement and applicable law. Review the clause with every roommate before signing.",
+      href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/",
+      link: "Review the Virginia landlord-tenant statutes",
+    },
+    "bank-arbitration": {
+      title: "Forced arbitration",
+      source: "FEDERAL ARBITRATION ACT · CONTRACT TERMS",
+      explanation:
+        "An arbitration clause may route covered disputes to a private arbitrator instead of court and may limit class proceedings. It does not automatically waive every legal right. Scope, enforceability, exceptions, and the particular agreement matter; save the full terms and any amendments.",
+      href: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title9-section2&num=0&edition=prelim",
+      link: "Read 9 U.S.C. § 2",
+    },
+    "bank-optout": {
+      title: "A 30-day opt-out window",
+      source: "CONTRACT TERM · NO UNIVERSAL 30-DAY RULE",
+      explanation:
+        "Some agreements offer a short window to opt out of arbitration, but the deadline, delivery method, and address are contract-specific; federal law does not create one universal 30-day opt-out period. If your terms offer one, follow the instructions exactly and keep proof of delivery.",
+      href: "https://www.consumerfinance.gov/consumer-tools/bank-accounts/",
+      link: "Explore CFPB bank-account resources",
+    },
+    "bank-overdraft": {
+      title: "Overdraft and junk-fee triggers",
+      source: "FEDERAL RULE · REGULATION E § 1005.17",
+      explanation:
+        "For covered accounts, a bank generally needs affirmative opt-in before charging an overdraft fee for paying an ATM or one-time debit-card transaction. That rule does not cover every overdraft or other fee. Compare the transaction, account agreement, and opt-in record before disputing a charge.",
+      href: "https://www.consumerfinance.gov/rules-policy/regulations/1005/17/",
+      link: "Read Regulation E § 1005.17",
+    },
+    "gym-renewal": {
+      title: "Automatic renewal",
+      source: "CONTRACT TERM · VA HEALTH CLUB ACT",
+      explanation:
+        "An auto-renewal term can continue a membership unless you give notice in the method and by the deadline in the contract. Virginia law gives buyers specific cancellation rights, including a three-business-day cancellation period; it does not create a general right to cancel at any time merely because a contract renews.",
+      href: "https://law.lis.virginia.gov/vacode/title59.1/chapter24/section59.1-297/",
+      link: "Read Va. Code § 59.1-297",
+    },
+    "gym-30day": {
+      title: "Written cancellation and the 30-day refund rule",
+      source: "VA CODE §§ 59.1-297, 59.1-297.1",
+      explanation:
+        "Virginia requires written notice for cancellations under this Act, sent by certified mail with return receipt or delivered personally to the contract address. If a statutory cancellation applies, the club generally must issue the calculated refund within 30 days. A separate disability cancellation is available when a buyer cannot use a substantial portion of services for 30 or more consecutive days, with required documentation.",
+      href: "https://law.lis.virginia.gov/vacode/title59.1/chapter24/section59.1-297/",
+      link: "Read Va. Code § 59.1-297",
+    },
+    "gym-fee": {
+      title: "Early termination fee",
+      source: "CONTRACT TERMS · VA CODE § 59.1-297.1",
+      explanation:
+        "Check how the contract calculates any ordinary early-termination charge; Virginia law does not make every early-exit fee automatically valid. The Health Club Act provides cancellation rights for specified situations and a statutory method for calculating refunds. A contract cannot erase a right the statute gives you.",
+      href: "https://law.lis.virginia.gov/vacode/title59.1/chapter24/section59.1-297.1/",
+      link: "Read Va. Code § 59.1-297.1",
+    },
+    "bnpl-late": {
+      title: "Late payment fee",
+      source: "BNPL CONTRACT · REVIEW THE PROVIDER’S CURRENT TERMS",
+      explanation:
+        "A missed installment may trigger a fee if the contract allows it, but the amount and consequences depend on the provider’s terms and applicable law. Save the payment schedule, notices, and receipts; contact the provider promptly if a return or billing error affected the amount due.",
+      href: "https://www.consumerfinance.gov/consumer-tools/buy-now-pay-later/",
+      link: "Explore CFPB BNPL resources",
+    },
+    "bnpl-autopay": {
+      title: "Autopay and bank overdrafts",
+      source: "FEDERAL RULE · REGULATION E § 1005.17",
+      explanation:
+        "A scheduled bank-account debit can arrive when funds are low and may lead to a bank fee under your account terms. Regulation E’s opt-in rule concerns overdraft fees for paying ATM and one-time debit-card transactions; it does not automatically cover every scheduled ACH payment. Review both agreements and bank alerts.",
+      href: "https://www.consumerfinance.gov/rules-policy/regulations/1005/17/",
+      link: "Read Regulation E § 1005.17",
+    },
+    "bnpl-disputes": {
+      title: "BNPL disputes and credit reporting",
+      source: "CFPB 2024 INTERPRETIVE RULE · WITHDRAWN IN 2025",
+      explanation:
+        "The CFPB’s 2024 interpretive rule said certain BNPL products were subject to credit-card provisions of Regulation Z, including billing-dispute protections. The CFPB withdrew that interpretive rule in 2025, so do not assume those protections apply solely because of that guidance. Other laws, the product’s structure, and the provider’s contract may still matter; inaccurate credit-report information can also be disputed under the Fair Credit Reporting Act.",
+      href: "https://www.federalregister.gov/documents/2025/05/12/2025-08286/interpretive-rules-policy-statements-and-advisory-opinions-withdrawal",
+      link: "Read the 2025 CFPB withdrawal notice",
+    },
+    "card-apr": {
+      title: "Variable APR and penalty APR",
+      source: "FEDERAL STATUTE · CARD ACT",
+      explanation:
+        "A variable APR may move with its stated index. A penalty APR can apply after a triggering event under the agreement, but federal law limits certain increases on existing balances. For some penalty-rate increases tied to delinquency, the issuer generally must review the account after six consecutive on-time minimum payments and restore the prior rate on the affected balance if the statutory conditions are met.",
+      href: "https://www.law.cornell.edu/uscode/text/15/1666i-1",
+      link: "Read 15 U.S.C. § 1666i-1",
+    },
+    "card-fees": {
+      title: "Over-limit and late-fee limits",
+      source: "FEDERAL RULE · REGULATION Z §§ 1026.52, 1026.56",
+      explanation:
+        "An issuer generally cannot charge an over-limit fee unless you affirmatively opted in to allow transactions over the limit. Credit-card penalty fees must also comply with federal standards. Exact permitted amounts and exceptions can change, so check the current rule and your statement rather than relying on an old fee chart.",
+      href: "https://www.consumerfinance.gov/rules-policy/regulations/1026/56/",
+      link: "Read Regulation Z § 1026.56",
+    },
+    "card-minimum": {
+      title: "The minimum-payment interest trap",
+      source: "FEDERAL STATUTE · CARD ACT · 15 U.S.C. § 1637",
+      explanation:
+        "The minimum keeps the account current if paid on time, but paying only that amount can leave a balance accruing interest for much longer. Federal law requires statements to include minimum-payment disclosures for many accounts. Paying more than the minimum, when possible, generally reduces interest and payoff time.",
+      href: "https://www.law.cornell.edu/uscode/text/15/1637",
+      link: "Read 15 U.S.C. § 1637",
+    },
+    "sublease-liability": {
+      title: "Subtenant and original-tenant liability",
+      source: "LEASE TERMS · VA CODE § 55.1-1204",
+      explanation:
+        "A sublease usually does not release the original tenant from obligations to the landlord unless the landlord agrees to a release. The subtenant may owe duties under the sublease, while the original tenant remains responsible under the master lease. Read both documents and get any release in writing.",
+      href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1204/",
+      link: "Read Va. Code § 55.1-1204",
+    },
+    "sublease-walkthrough": {
+      title: "Move-in inspection and deposit checklist",
+      source: "VA CODE §§ 55.1-1214, 55.1-1226",
+      explanation:
+        "Virginia generally requires the landlord to provide a written move-in damage report within five days after occupancy; tenants have five days after receiving it to object in writing. Take dated photos, keep the report, and compare it with move-out condition. The security-deposit statute separately governs deductions and accounting.",
+      href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1214/",
+      link: "Read Va. Code § 55.1-1214",
+    },
+    "sublease-consent": {
+      title: "Landlord approval for a subtenant",
+      source: "VA CODE § 55.1-1204(G) · CHECK THE LEASE",
+      explanation:
+        "Virginia Code § 55.1-1200 is a definitions section; it does not itself impose a universal written-consent rule. If the rental agreement allows the landlord to approve or disapprove a sublessee, § 55.1-1204(G) requires a decision within 10 business days after a written application on the landlord’s form; failure to act is evidence of approval. Read the actual lease before subletting.",
+      href: "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1204/",
+      link: "Read Va. Code § 55.1-1204(G)",
+    },
+    "privacy-arbitration": {
+      title: "Arbitration and class-action waiver",
+      source: "FEDERAL ARBITRATION ACT · CONTRACT TERMS",
+      explanation:
+        "An enforceable arbitration clause may direct covered disputes to a private arbitrator and may limit class proceedings. The Federal Arbitration Act generally governs written arbitration agreements in covered transactions, but scope, enforceability, exceptions, and the terms of any opt-out are contract-specific.",
+      href: "https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title9-section2&num=0&edition=prelim",
+      link: "Read 9 U.S.C. § 2",
+    },
+    "privacy-sharing": {
+      title: "Third-party data sharing",
+      source: "PRIVACY NOTICE · FTC CONSUMER PROTECTION",
+      explanation:
+        "The privacy notice should explain what information is collected, why it is used, and which service providers or partners receive it. A company’s public promises can matter under the FTC Act, but the exact duties depend on the service, data, and applicable privacy laws. Check settings and the notice’s effective date.",
+      href: "https://www.ftc.gov/business-guidance/privacy-security",
+      link: "Review FTC privacy guidance",
+    },
+    "privacy-license": {
+      title: "License to user-generated content",
+      source: "PLATFORM TERMS · COPYRIGHT LICENSE",
+      explanation:
+        "A license usually gives the platform permission to host, display, or distribute content under stated conditions; it does not necessarily transfer ownership. Check whether the license is worldwide, sublicensable, perpetual, or survives account deletion, and avoid posting material you do not have permission to share.",
+      href: "https://www.copyright.gov/what-is-copyright/",
+      link: "Learn about copyright",
+    },
+  };
+
+  function initializeDocumentDecoders() {
+    document
+      .querySelectorAll<HTMLElement>("[data-document-decoder]")
+      .forEach(root => {
+        if (root.dataset.initialized) return;
+        root.dataset.initialized = "true";
+
+        const tabs = Array.from(
+          root.querySelectorAll<HTMLButtonElement>("[data-document-tab]")
+        );
+        const panels = Array.from(
+          root.querySelectorAll<HTMLElement>("[data-document-panel]")
+        );
+        const detailCopy =
+          root.querySelector<HTMLElement>("[data-detail-copy]");
+        const detailSource = root.querySelector<HTMLElement>(
+          "[data-detail-source]"
+        );
+        const detailLink =
+          root.querySelector<HTMLAnchorElement>("[data-detail-link]");
+        if (!detailCopy || !detailSource || !detailLink) return;
+
+        const setDocument = (id: string) => {
+          tabs.forEach(tab => {
+            const active = tab.dataset.documentTab === id;
+            tab.setAttribute("aria-selected", String(active));
+            tab.tabIndex = active ? 0 : -1;
+            tab.classList.toggle("bg-marigold", active);
+            tab.classList.toggle("text-forest", active);
+            tab.classList.toggle("border", !active);
+            tab.classList.toggle("border-border", !active);
+            tab.classList.toggle("text-foreground", !active);
+          });
+          panels.forEach(panel => {
+            panel.hidden = panel.dataset.documentPanel !== id;
+          });
+          root
+            .querySelectorAll<HTMLButtonElement>("[data-clause]")
+            .forEach(button => button.setAttribute("aria-pressed", "false"));
+          detailCopy.textContent =
+            "Choose a highlighted clause in the document to see what it may mean and which law or contract term to check.";
+          detailSource.textContent = "";
+          detailLink.hidden = true;
+        };
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => {
+            const id = tab.dataset.documentTab;
+            if (id) setDocument(id);
+          });
+          tab.addEventListener("keydown", event => {
+            if (
+              event.key !== "ArrowRight" &&
+              event.key !== "ArrowLeft" &&
+              event.key !== "Home" &&
+              event.key !== "End"
+            ) {
+              return;
+            }
+            event.preventDefault();
+            const nextIndex =
+              event.key === "Home"
+                ? 0
+                : event.key === "End"
+                  ? tabs.length - 1
+                  : (index +
+                      (event.key === "ArrowRight" ? 1 : -1) +
+                      tabs.length) %
+                    tabs.length;
+            tabs[nextIndex]?.focus();
+            const id = tabs[nextIndex]?.dataset.documentTab;
+            if (id) setDocument(id);
+          });
+        });
+
+        root.addEventListener("click", event => {
+          if (!(event.target instanceof Element)) return;
+          const clause =
+            event.target.closest<HTMLButtonElement>("[data-clause]");
+          if (!clause) return;
+          const key = clause.dataset.clause;
+          const detail = key ? clauseDetails[key] : undefined;
+          if (!detail) return;
+
+          root
+            .querySelectorAll<HTMLButtonElement>("[data-clause]")
+            .forEach(button =>
+              button.setAttribute("aria-pressed", String(button === clause))
+            );
+          detailCopy.textContent = detail.explanation;
+          detailSource.textContent = detail.source;
+          detailLink.href = detail.href;
+          detailLink.textContent = detail.link;
+          detailLink.hidden = false;
+          root
+            .querySelector("[data-clause-explanation-title]")
+            ?.replaceChildren(document.createTextNode(detail.title));
+        });
+      });
+  }
+
+  initializeDocumentDecoders();
+  document.addEventListener("astro:page-load", initializeDocumentDecoders);
+</script>

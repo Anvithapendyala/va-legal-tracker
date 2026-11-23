@@ -1,0 +1,297 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const glossary = [
+  {
+    term: "Amicus brief",
+    definition:
+      "A filing by a person or organization that is not a party to a case, offering information or arguments the court may find useful. The court decides whether and how to consider it.",
+  },
+  {
+    term: "Fiduciary duty",
+    definition:
+      "A legal obligation arising in certain relationships to act loyally and carefully for another person’s interests. Whether the duty exists and what it requires depends on the relationship and governing law.",
+  },
+  {
+    term: "Forced arbitration",
+    definition:
+      "A contract term that may require disputes to be decided in private arbitration rather than court. The clause’s scope, enforceability, and any opt-out or exception depend on the agreement and law.",
+  },
+  {
+    term: "Liquidated damages",
+    definition:
+      "A contract’s pre-set amount for a particular breach. Courts may enforce a reasonable estimate of hard-to-measure loss, but a clause that operates as an unlawful penalty may not be enforceable.",
+  },
+  {
+    term: "Probable cause",
+    definition:
+      "A practical, fact-based threshold generally requiring a fair probability that evidence of a crime will be found or that an offense occurred. It is commonly relevant to warrants and arrests.",
+  },
+  {
+    term: "Reasonable suspicion",
+    definition:
+      "A lower threshold than probable cause, requiring specific, articulable facts that support a brief investigative stop. A hunch alone is not enough; the circumstances matter.",
+  },
+  {
+    term: "Summary judgment",
+    definition:
+      "A court decision without a trial when the required legal standard is met—generally, no genuine dispute of material fact and the moving party is entitled to judgment under the law.",
+  },
+];
+---
+
+<Layout
+  title={`Court System & Legal Glossary | ${config.site.title}`}
+  description="Understand Virginia and federal appeal routes and search a plain-English glossary of common legal and financial terms."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-8 max-w-3xl sm:mb-10">
+      <a
+        href={getRelativeLocaleUrl(locale, "reference")}
+        class="text-forest decoration-manila text-sm font-semibold underline underline-offset-4"
+      >
+        ← Reference Library
+      </a>
+      <p class="text-forest mt-6 text-xs font-bold tracking-[0.16em] uppercase">
+        Reference guide 03
+      </p>
+      <h1 class="font-heading text-forest mt-2 text-4xl font-bold sm:text-5xl">
+        Court System &amp; Legal Glossary
+      </h1>
+      <p class="text-muted-foreground mt-3 text-base leading-relaxed">
+        State and federal courts are separate systems. Many cases follow a
+        different route depending on the court, claim, and appeal rules.
+      </p>
+    </header>
+
+    <section aria-labelledby="court-ladder-title">
+      <div class="mb-5">
+        <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+          How appeals can move
+        </p>
+        <h2
+          id="court-ladder-title"
+          class="font-heading mt-1 text-2xl font-bold sm:text-3xl"
+        >
+          The Virginia &amp; Federal Court Ladder
+        </h2>
+      </div>
+      <div class="grid gap-5 lg:grid-cols-2">
+        <article class="border-border bg-muted rounded-2xl border p-5 sm:p-6">
+          <h3 class="text-forest text-lg font-bold">Virginia state courts</h3>
+          <ol class="mt-4 space-y-3">
+            <li class="border-border bg-background rounded-xl border p-4">
+              <span
+                class="text-stamp-red text-xs font-bold tracking-wide uppercase"
+                >Trial courts</span
+              >
+              <p class="text-foreground mt-1 font-semibold">
+                General District Court &amp; Juvenile and Domestic Relations
+                District Court
+              </p>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                Handle many traffic, misdemeanor, civil, family, and juvenile
+                matters. Circuit Courts hear appeals from these district courts
+                and also decide some cases at trial.
+              </p>
+            </li>
+            <li
+              class="text-manila text-center text-xl font-bold"
+              aria-hidden="true"
+            >
+              ↓
+            </li>
+            <li class="border-border bg-background rounded-xl border p-4">
+              <span
+                class="text-stamp-red text-xs font-bold tracking-wide uppercase"
+                >Trial &amp; appellate review</span
+              >
+              <p class="text-foreground mt-1 font-semibold">Circuit Court</p>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                Tries more serious cases and reviews many district-court
+                appeals. Further review depends on the type of case and appeal
+                rules.
+              </p>
+            </li>
+            <li
+              class="text-manila text-center text-xl font-bold"
+              aria-hidden="true"
+            >
+              ↓
+            </li>
+            <li class="border-border bg-background rounded-xl border p-4">
+              <span
+                class="text-stamp-red text-xs font-bold tracking-wide uppercase"
+                >Appellate courts</span
+              >
+              <p class="text-foreground mt-1 font-semibold">
+                Court of Appeals of Virginia → Supreme Court of Virginia
+              </p>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                The Court of Appeals hears many appeals; some matters go
+                directly to the Supreme Court of Virginia, and further review is
+                governed by jurisdiction and procedure.
+              </p>
+            </li>
+          </ol>
+        </article>
+
+        <article class="border-border bg-muted rounded-2xl border p-5 sm:p-6">
+          <h3 class="text-forest text-lg font-bold">Federal courts</h3>
+          <ol class="mt-4 space-y-3">
+            <li class="border-border bg-background rounded-xl border p-4">
+              <span
+                class="text-stamp-red text-xs font-bold tracking-wide uppercase"
+                >Trial court</span
+              >
+              <p class="text-foreground mt-1 font-semibold">
+                U.S. District Court
+              </p>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                Federal trial courts hear cases within federal subject-matter
+                jurisdiction. Virginia is served by the Eastern and Western
+                Districts of Virginia.
+              </p>
+            </li>
+            <li
+              class="text-manila text-center text-xl font-bold"
+              aria-hidden="true"
+            >
+              ↓
+            </li>
+            <li class="border-border bg-background rounded-xl border p-4">
+              <span
+                class="text-stamp-red text-xs font-bold tracking-wide uppercase"
+                >Regional appellate court</span
+              >
+              <p class="text-foreground mt-1 font-semibold">
+                U.S. Court of Appeals for the Fourth Circuit
+              </p>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                Reviews many appeals from federal district courts in Virginia
+                and other states in the circuit.
+              </p>
+            </li>
+            <li
+              class="text-manila text-center text-xl font-bold"
+              aria-hidden="true"
+            >
+              ↓
+            </li>
+            <li class="border-border bg-background rounded-xl border p-4">
+              <span
+                class="text-stamp-red text-xs font-bold tracking-wide uppercase"
+                >Highest federal court</span
+              >
+              <p class="text-foreground mt-1 font-semibold">
+                U.S. Supreme Court
+              </p>
+              <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+                The Court selects most cases for review. A party generally must
+                meet jurisdictional and procedural requirements before seeking
+                review.
+              </p>
+            </li>
+          </ol>
+        </article>
+      </div>
+      <p class="text-muted-foreground mt-4 text-xs leading-relaxed">
+        These are simplified routes, not guaranteed steps in every case. The
+        state and federal systems do not merge into one appeal ladder.
+      </p>
+    </section>
+
+    <section class="mt-12" aria-labelledby="glossary-title" data-glossary>
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+            Searchable definitions
+          </p>
+          <h2
+            id="glossary-title"
+            class="font-heading mt-1 text-2xl font-bold sm:text-3xl"
+          >
+            Legal &amp; Financial Glossary
+          </h2>
+        </div>
+        <label class="text-foreground grid gap-1 text-xs font-semibold">
+          Search terms
+          <input
+            type="search"
+            data-glossary-search
+            class="border-border bg-background min-h-11 w-full rounded-lg border px-3 py-2 text-sm font-normal sm:w-72"
+            placeholder="Try “probable cause”"
+          />
+        </label>
+      </div>
+
+      <dl
+        class="divide-border border-border bg-muted mt-5 divide-y rounded-2xl border px-5"
+      >
+        {
+          glossary.map(entry => (
+            <div class="py-4" data-glossary-entry>
+              <dt class="font-heading text-forest text-lg font-bold">
+                {entry.term}
+              </dt>
+              <dd class="text-muted-foreground mt-1 max-w-4xl text-sm leading-relaxed">
+                {entry.definition}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p
+        class="border-border bg-background text-muted-foreground mt-4 rounded-lg border p-4 text-sm"
+        data-glossary-empty
+        role="status"
+        hidden
+      >
+        No glossary terms match that search.
+      </p>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  function initializeGlossarySearch() {
+    document.querySelectorAll<HTMLElement>("[data-glossary]").forEach(root => {
+      if (root.dataset.initialized) return;
+      root.dataset.initialized = "true";
+
+      const input = root.querySelector<HTMLInputElement>(
+        "[data-glossary-search]"
+      );
+      const entries = Array.from(
+        root.querySelectorAll<HTMLElement>("[data-glossary-entry]")
+      );
+      const emptyState = root.querySelector<HTMLElement>(
+        "[data-glossary-empty]"
+      );
+      if (!input || !entries.length || !emptyState) return;
+
+      input.addEventListener("input", () => {
+        const query = input.value.trim().toLocaleLowerCase();
+        let visibleCount = 0;
+        entries.forEach(entry => {
+          const visible = entry.textContent
+            ?.toLocaleLowerCase()
+            .includes(query);
+          entry.hidden = !visible;
+          if (visible) visibleCount += 1;
+        });
+        emptyState.hidden = visibleCount > 0;
+      });
+    });
+  }
+
+  initializeGlossarySearch();
+  document.addEventListener("astro:page-load", initializeGlossarySearch);
+</script>

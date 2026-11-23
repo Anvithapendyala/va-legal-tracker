@@ -5,6 +5,15 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+html {
+  color-scheme: light;
+  background-color: var(--background);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 @layer base {
   * {
     @apply border-border outline-accent/75;
@@ -36,4 +45,26 @@
 
 :target {
   scroll-margin-block: 1rem;
+}
+:root {
+  --font-app: var(--font-inter), Inter, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+}
+
+body {
+  font-family: var(--font-app);
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+::selection {
+  color: var(--accent-foreground);
+  background-color: var(--accent);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-newsreader), Newsreader, Georgia, serif;
+  letter-spacing: -0.015em;
 }

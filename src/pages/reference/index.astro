@@ -1,0 +1,101 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const guides = [
+  {
+    number: "01",
+    title: "Constitutional Amendments Guide",
+    description:
+      "Plain-English explanations of six amendments, where they matter, and case briefings to explore next.",
+    href: "reference/amendments",
+    label: "Constitutional rights",
+  },
+  {
+    number: "02",
+    title: "Virginia Code Essentials",
+    description:
+      "A practical index to Virginia rules on wages, security deposits, provisional licenses, and consumer protection.",
+    href: "reference/virginia-code",
+    label: "Virginia statutes",
+  },
+  {
+    number: "03",
+    title: "Court System & Legal Glossary",
+    description:
+      "Follow the separate Virginia and federal appeal routes, then search common legal terms in plain English.",
+    href: "reference/courts-glossary",
+    label: "Courts & terms",
+  },
+  {
+    number: "04",
+    title: "Money & Consumer Playbooks",
+    description:
+      "Start with a pay stub, a credit-card agreement, or a bank and subscription charge.",
+    href: "reference/money-playbooks",
+    label: "Everyday finance",
+  },
+];
+---
+
+<Layout
+  title={`Reference Library | ${config.site.title}`}
+  description="Plain-English guides to constitutional rights, Virginia statutes, courts, legal terms, and everyday consumer finance."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-9 max-w-3xl sm:mb-12">
+      <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+        Virginia Legal Brief · Reference Library
+      </p>
+      <h1
+        class="font-heading text-forest mt-3 text-5xl leading-tight font-bold sm:text-6xl"
+      >
+        Start with the source.
+      </h1>
+      <p
+        class="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg"
+      >
+        Four practical guides connect the rules behind everyday questions to
+        their statutes, court systems, and plain-English meanings.
+      </p>
+    </header>
+
+    <section
+      class="grid grid-cols-1 gap-5 md:grid-cols-2"
+      aria-label="Reference guides"
+    >
+      {
+        guides.map(guide => (
+          <a
+            href={getRelativeLocaleUrl(locale, guide.href)}
+            class="group border-border bg-muted hover:border-forest flex min-h-56 flex-col rounded-2xl border p-5 transition-colors sm:p-7"
+          >
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-forest text-xs font-bold tracking-[0.14em]">
+                GUIDE {guide.number}
+              </span>
+              <span class="bg-marigold text-forest rounded-full px-3 py-1 text-xs font-bold">
+                {guide.label}
+              </span>
+            </div>
+            <h2 class="font-heading text-forest mt-5 text-2xl font-bold sm:text-3xl">
+              {guide.title}
+            </h2>
+            <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+              {guide.description}
+            </p>
+            <span class="text-forest decoration-manila mt-auto pt-5 text-sm font-bold underline decoration-2 underline-offset-4 group-hover:decoration-4">
+              Open guide →
+            </span>
+          </a>
+        ))
+      }
+    </section>
+  </main>
+  <Footer />
+</Layout>

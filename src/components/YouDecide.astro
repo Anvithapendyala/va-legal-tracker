@@ -1,0 +1,152 @@
+---
+type Choice = {
+  label: string;
+  value: string;
+};
+
+type Props = {
+  caseId: string;
+  eyebrow: string;
+  prompt: string;
+  choices: Choice[];
+  correctChoice: string;
+  ruling: string;
+  studentImpact: string;
+  sourceLabel: string;
+  briefingHref: string;
+  briefingLinkText: string;
+};
+
+const {
+  caseId,
+  eyebrow,
+  prompt,
+  choices,
+  correctChoice,
+  ruling,
+  studentImpact,
+  sourceLabel,
+  briefingHref,
+  briefingLinkText,
+} = Astro.props;
+---
+
+<section
+  id={`case-file-${caseId}`}
+  class="overflow-hidden rounded-3xl bg-forest text-parchment shadow-xl"
+  data-you-decide
+  data-correct-choice={correctChoice}
+  aria-labelledby={`case-prompt-${caseId}`}
+>
+  <div class="h-2 bg-manila"></div>
+  <div class="p-6 sm:p-9">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <p class="text-xs font-bold tracking-[0.16em] text-manila uppercase">
+        {eyebrow}
+      </p>
+      <span class="rounded-sm bg-stamp-red px-2.5 py-1 text-[0.65rem] font-bold tracking-wide text-parchment">
+        {sourceLabel}
+      </span>
+    </div>
+    <h2
+      id={`case-prompt-${caseId}`}
+      class="mt-5 max-w-4xl font-heading text-3xl leading-tight font-bold sm:text-4xl"
+    >
+      {prompt}
+    </h2>
+
+    <fieldset class="mt-7">
+      <legend class="mb-3 text-sm font-semibold">Choose the ruling you think is right:</legend>
+      <div class="grid gap-3 md:grid-cols-2">
+        {
+          choices.map(choice => (
+            <button
+              type="button"
+              data-choice={choice.value}
+              aria-pressed="false"
+              class="rounded-xl border border-parchment/25 px-4 py-4 text-left text-sm font-semibold leading-relaxed text-parchment transition hover:border-manila focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              {choice.label}
+            </button>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <button
+      type="button"
+      data-reveal
+      disabled
+      class="mt-5 rounded-lg bg-marigold px-5 py-3 text-sm font-bold text-forest transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-45"
+    >
+      You decide · Reveal the ruling
+    </button>
+
+    <div
+      class="mt-6 rounded-2xl border border-manila/50 bg-parchment p-5 text-forest sm:p-6"
+      data-decision
+      aria-live="polite"
+      hidden
+    >
+      <p class="text-xs font-bold tracking-[0.14em] text-stamp-red uppercase" data-verdict></p>
+      <p class="mt-3 text-sm leading-relaxed">{ruling}</p>
+      <p class="mt-3 text-sm leading-relaxed">{studentImpact}</p>
+      <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+        <span class="text-xs font-bold tracking-wide text-stamp-red">{sourceLabel}</span>
+        <a
+          href={briefingHref}
+          class="inline-flex rounded-lg bg-marigold px-4 py-2.5 text-sm font-bold text-forest transition hover:brightness-95"
+        >
+          {briefingLinkText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initializeCaseFiles() {
+    document.querySelectorAll<HTMLElement>("[data-you-decide]").forEach(card => {
+      if (card.dataset.initialized) return;
+      card.dataset.initialized = "true";
+
+      const correctChoice = card.dataset.correctChoice;
+      const revealButton = card.querySelector<HTMLButtonElement>("[data-reveal]");
+      const decision = card.querySelector<HTMLDivElement>("[data-decision]");
+      const verdict = card.querySelector<HTMLElement>("[data-verdict]");
+      if (!correctChoice || !revealButton || !decision || !verdict) return;
+
+      let selectedChoice: string | undefined;
+
+      card.querySelectorAll<HTMLButtonElement>("[data-choice]").forEach(button => {
+        button.addEventListener("click", () => {
+          selectedChoice = button.dataset.choice;
+          if (!selectedChoice) return;
+
+          card.querySelectorAll<HTMLButtonElement>("[data-choice]").forEach(option => {
+            const selected = option === button;
+            option.setAttribute("aria-pressed", String(selected));
+            option.classList.toggle("border-marigold", selected);
+            option.classList.toggle("bg-marigold", selected);
+            option.classList.toggle("text-forest", selected);
+            option.classList.toggle("text-parchment", !selected);
+          });
+          decision.hidden = true;
+          revealButton.disabled = false;
+        });
+      });
+
+      revealButton.addEventListener("click", () => {
+        if (!selectedChoice) return;
+        verdict.textContent =
+          selectedChoice === correctChoice
+            ? "You matched the Supreme Court’s ruling."
+            : "The Supreme Court reached a different ruling.";
+        decision.hidden = false;
+      });
+    });
+  }
+
+  initializeCaseFiles();
+  document.addEventListener("astro:page-load", initializeCaseFiles);
+</script>

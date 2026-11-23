@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import DocumentDecoder from "@/components/DocumentDecoder.astro";
+---
+
+<Layout
+  title="The Fine Print | Virginia Legal Brief"
+  description="Decode eight everyday documents—from job offers and leases to BNPL plans, gym contracts, credit cards, and app privacy terms—with plain-English legal explanations."
+>
+  <Header />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 py-9 sm:py-14">
+    <header class="mb-8 max-w-3xl sm:mb-10">
+      <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+        Document decoder
+      </p>
+      <h1
+        class="font-heading text-forest mt-3 text-5xl leading-tight font-bold sm:text-6xl"
+      >
+        The Fine Print
+      </h1>
+      <p
+        class="text-muted-foreground mt-4 text-base leading-relaxed sm:text-lg"
+      >
+        Job offers, leases, bank terms, and everyday contracts can hide
+        deadlines and obligations in dense language. Choose one of eight sample
+        documents, then select a highlighted clause for a plain-English
+        explanation and the rules to check.
+      </p>
+      <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+        These are illustrative examples, not legal advice or substitutes for
+        reading your actual agreement. Terms and laws can vary by provider and
+        situation.
+      </p>
+    </header>
+
+    <DocumentDecoder />
+  </main>
+  <Footer />
+</Layout>

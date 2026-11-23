@@ -1,40 +1,201 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
-import Main from "@/components/Main.astro";
 import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
-import Pagination from "@/components/Pagination.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
-import { useTranslations } from "@/i18n";
 import config from "@/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
-  return paginate(getSortedPosts(posts), { pageSize: config.posts.perPage });
+  const sortedPosts = getSortedPosts(posts);
+  return paginate(sortedPosts, { pageSize: Math.max(sortedPosts.length, 1) });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
-
 const locale = Astro.currentLocale ?? config.site.lang;
-const t = useTranslations(locale);
+const filterCategories = (tags: string[]) => {
+  const categories = ["all"];
+  if (tags.includes("virginia-law")) categories.push("virginia-law");
+  if (
+    tags.some(tag =>
+      [
+        "1st-amendment",
+        "4th-amendment",
+        "5th-amendment",
+        "14th-amendment",
+      ].includes(tag)
+    )
+  ) {
+    categories.push("constitutional-rights");
+  }
+  if (tags.includes("consumer-finance")) categories.push("consumer-finance");
+  if (tags.includes("student-rights") || tags.includes("juvenile-law")) {
+    categories.push("student-rights");
+  }
+  return categories.join(" ");
+};
+
+const backUrl = config.features.showBackButton
+  ? Astro.url.pathname
+  : getRelativeLocaleUrl(locale, "");
 ---
 
-<Layout title={`${t.pages.postsTitle} | ${config.site.title}`}>
+<Layout
+  title={`Law Tracker | ${config.site.title}`}
+  description="Browse source-linked Virginia and federal legal and consumer-finance briefings."
+>
   <Header />
-
   <Breadcrumb />
+  <main
+    id="main-content"
+    data-backurl={backUrl}
+    class="mx-auto w-full max-w-6xl px-4 pb-8"
+  >
+    <header class="mb-7">
+      <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+        Source-linked briefings
+      </p>
+      <h1 class="font-heading text-forest mt-2 text-4xl font-bold sm:text-5xl">
+        Law Tracker
+      </h1>
+      <p
+        class="text-muted-foreground mt-3 max-w-3xl text-sm leading-relaxed sm:text-base"
+      >
+        Browse the latest Virginia and federal cases, statutes, student rights,
+        and consumer-finance explainers.
+      </p>
+    </header>
 
-  <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc}>
-    <ul>
-      {page.data.map(data => <Card {...data} />)}
-    </ul>
-  </Main>
+    <section data-post-filter-root aria-label="Filter legal briefings">
+      <div
+        class="mb-6 flex flex-wrap gap-2"
+        role="group"
+        aria-label="Filter briefings by category"
+      >
+        <button
+          type="button"
+          data-post-filter="all"
+          aria-pressed="true"
+          class="border-marigold bg-marigold text-forest rounded-full border px-4 py-2 text-sm font-semibold"
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-post-filter="virginia-law"
+          aria-pressed="false"
+          class="border-border bg-background text-foreground hover:border-forest rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+        >
+          Virginia Law
+        </button>
+        <button
+          type="button"
+          data-post-filter="constitutional-rights"
+          aria-pressed="false"
+          class="border-border bg-background text-foreground hover:border-forest rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+        >
+          Constitutional Rights
+        </button>
+        <button
+          type="button"
+          data-post-filter="consumer-finance"
+          aria-pressed="false"
+          class="border-border bg-background text-foreground hover:border-forest rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+        >
+          Consumer Finance
+        </button>
+        <button
+          type="button"
+          data-post-filter="student-rights"
+          aria-pressed="false"
+          class="border-border bg-background text-foreground hover:border-forest rounded-full border px-4 py-2 text-sm font-semibold transition-colors"
+        >
+          Student Rights
+        </button>
+      </div>
 
-  <Pagination {page} />
-
-  <Footer noMarginTop={page.lastPage > 1} />
+      <ul class="grid grid-cols-1 gap-5 md:grid-cols-2" data-post-grid>
+        {
+          page.data.map(data => (
+            <Card
+              {...data}
+              filterCategories={filterCategories(data.data.tags)}
+              inGrid
+            />
+          ))
+        }
+      </ul>
+      <p
+        class="border-border bg-muted text-muted-foreground mt-8 rounded-xl border p-5 text-sm"
+        data-post-filter-empty
+        role="status"
+        hidden
+      >
+        No briefings match this category yet.
+      </p>
+    </section>
+  </main>
+  <Footer />
 </Layout>
+
+<script>
+  function initializePostFilters() {
+    document
+      .querySelectorAll<HTMLElement>("[data-post-filter-root]")
+      .forEach(root => {
+        if (root.dataset.initialized) return;
+        root.dataset.initialized = "true";
+
+        const buttons = Array.from(
+          root.querySelectorAll<HTMLButtonElement>("[data-post-filter]")
+        );
+        const cards = Array.from(
+          root.querySelectorAll<HTMLLIElement>("[data-post-card]")
+        );
+        const emptyState = root.querySelector<HTMLElement>(
+          "[data-post-filter-empty]"
+        );
+        if (!buttons.length || !cards.length || !emptyState) return;
+
+        buttons.forEach(button => {
+          button.addEventListener("click", () => {
+            const filter = button.dataset.postFilter ?? "all";
+            buttons.forEach(option => {
+              const active = option === button;
+              option.setAttribute("aria-pressed", String(active));
+              option.classList.toggle("border-marigold", active);
+              option.classList.toggle("bg-marigold", active);
+              option.classList.toggle("text-forest", active);
+              option.classList.toggle("border-border", !active);
+              option.classList.toggle("bg-background", !active);
+              option.classList.toggle("text-foreground", !active);
+            });
+
+            let visibleCount = 0;
+            cards.forEach(card => {
+              const categories =
+                card.dataset.filterCategories?.split(" ") ?? [];
+              const visible = filter === "all" || categories.includes(filter);
+              card.hidden = !visible;
+              if (visible) visibleCount += 1;
+            });
+            emptyState.hidden = visibleCount > 0;
+          });
+        });
+      });
+  }
+
+  initializePostFilters();
+  document.addEventListener("astro:page-load", initializePostFilters);
+
+  document.addEventListener("astro:page-load", () => {
+    const mainContent = document.querySelector<HTMLElement>("#main-content");
+    const backUrl = mainContent?.dataset.backurl;
+    if (backUrl) sessionStorage.setItem("backUrl", backUrl);
+  });
+</script>

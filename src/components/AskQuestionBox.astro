@@ -1,0 +1,135 @@
+<section
+  id="ask-a-question"
+  class="border-border bg-muted rounded-2xl border p-5 sm:p-7"
+  aria-labelledby="ask-question-title"
+>
+  <div class="flex flex-wrap items-start justify-between gap-4">
+    <div>
+      <p class="text-forest text-xs font-bold tracking-[0.14em] uppercase">
+        24-hour question desk
+      </p>
+      <h2 id="ask-question-title" class="mt-2 text-2xl font-bold sm:text-3xl">
+        Submit a Legal or Money Question — Response within 24 hours
+      </h2>
+      <p class="text-muted-foreground mt-2 max-w-2xl text-sm leading-relaxed">
+        Share a question for the editorial team. Submitting opens a prefilled
+        email; your message is sent only after you press Send in your email app.
+      </p>
+    </div>
+  </div>
+
+  <form class="mt-6 grid gap-4 sm:grid-cols-2" data-ask-question-form>
+    <label class="grid gap-1.5 text-sm font-semibold">
+      Category
+      <select
+        name="category"
+        required
+        class="border-border bg-background text-foreground min-h-11 rounded-lg border px-3 py-2 font-normal"
+      >
+        <option value="" selected disabled> Choose a topic </option>
+        <option>School &amp; Student Rights</option>
+        <option>Paycheck &amp; Workplace</option>
+        <option>Banking &amp; Contracts</option>
+        <option>Renting &amp; Leases</option>
+        <option>Juvenile Law</option>
+      </select>
+    </label>
+    <label class="grid gap-1.5 text-sm font-semibold">
+      Your email
+      <input
+        type="email"
+        name="replyTo"
+        autocomplete="email"
+        required
+        class="border-border bg-background text-foreground min-h-11 rounded-lg border px-3 py-2 font-normal"
+        placeholder="you@example.com"
+      />
+    </label>
+    <label class="grid gap-1.5 text-sm font-semibold sm:col-span-2">
+      Your question
+      <textarea
+        name="question"
+        required
+        minlength="10"
+        rows="5"
+        class="border-border bg-background text-foreground rounded-lg border px-3 py-2 font-normal"
+        placeholder="What happened? Include the state and any important dates, but leave out private account numbers or other sensitive details."
+      ></textarea>
+    </label>
+    <div class="sm:col-span-2">
+      <button
+        type="submit"
+        class="bg-marigold text-forest rounded-lg px-5 py-3 text-sm font-bold transition hover:brightness-95"
+      >
+        Prepare question email
+      </button>
+      <p class="text-muted-foreground mt-2 text-xs leading-relaxed">
+        The team reviews inquiries and aims to respond within 24 hours after
+        receiving your email. Please do not include confidential or highly
+        sensitive information.
+      </p>
+    </div>
+  </form>
+
+  <div
+    class="border-manila/70 bg-background text-foreground mt-5 rounded-xl border p-4 text-sm leading-relaxed"
+    data-question-status
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+  </div>
+</section>
+
+<script>
+  function initializeQuestionForms() {
+    document
+      .querySelectorAll<HTMLFormElement>("[data-ask-question-form]")
+      .forEach(form => {
+        if (form.dataset.initialized) return;
+        form.dataset.initialized = "true";
+
+        const status = form
+          .closest<HTMLElement>("#ask-a-question")
+          ?.querySelector<HTMLDivElement>("[data-question-status]");
+        form.addEventListener("submit", event => {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+
+          const formData = new FormData(form);
+          const category = String(formData.get("category") ?? "");
+          const replyTo = String(formData.get("replyTo") ?? "");
+          const question = String(formData.get("question") ?? "");
+          const subject = `Question for Virginia Legal Brief: ${category}`;
+          const body = [
+            `Category: ${category}`,
+            `Reply to: ${replyTo}`,
+            "",
+            "Question:",
+            question,
+          ].join("\n");
+          const mailto = `mailto:virginialegalbrief@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+          if (status) {
+            status.replaceChildren();
+            const message = document.createElement("p");
+            message.textContent =
+              "Your email draft is ready. It has not been received yet—press Send in your email app to submit it. Once received, the Virginia Legal Brief editorial desk reviews every inquiry and aims to respond within 24 hours.";
+            const directLink = document.createElement("a");
+            directLink.href = "mailto:virginialegalbrief@gmail.com";
+            directLink.className =
+              "mt-2 inline-block font-semibold text-forest underline decoration-manila underline-offset-4";
+            directLink.textContent =
+              "Contact us directly at virginialegalbrief@gmail.com";
+            status.append(message, directLink);
+            status.hidden = false;
+          }
+
+          window.location.href = mailto;
+        });
+      });
+  }
+
+  initializeQuestionForms();
+  document.addEventListener("astro:page-load", initializeQuestionForms);
+</script>
