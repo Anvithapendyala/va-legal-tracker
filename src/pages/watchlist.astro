@@ -1,0 +1,257 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+
+const stages = [
+  "Filed / Docketed",
+  "Committee / Argued",
+  "Passed / Pending Opinion",
+  "Enacted / Decided",
+];
+
+const watchItems = [
+  {
+    title: "Virginia minimum wage: scheduled 2027 increase",
+    jurisdiction: "VA GENERAL ASSEMBLY",
+    status: "Enacted; scheduled to take effect Jan. 1, 2027",
+    stage: 3,
+    before:
+      "The 2026 Virginia minimum wage is $12.77 per hour for covered workers.",
+    after:
+      "Va. Code § 40.1-28.10 schedules $13.75 per hour beginning Jan. 1, 2027; coverage and exemptions still matter.",
+    verified: "Nov. 23, 2026",
+    sourceLabel: "VA CODE § 40.1-28.10",
+    source:
+      "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-28.10/",
+    briefing: "virginia-minimum-wage-youth-exemptions",
+  },
+  {
+    title: "Virginia minimum-wage employee exemptions",
+    jurisdiction: "VA GENERAL ASSEMBLY",
+    status: "Enacted; future statutory version begins Jan. 1, 2027",
+    stage: 3,
+    before:
+      "The current employee definition lists specific age, student, and other exceptions.",
+    after:
+      "A future version of § 40.1-28.9 takes effect Jan. 1, 2027; workers should check the version that applies to their work dates.",
+    verified: "Nov. 23, 2026",
+    sourceLabel: "VA CODE § 40.1-28.9",
+    source:
+      "https://law.lis.virginia.gov/vacode/title40.1/chapter3/section40.1-28.9/",
+    briefing: "virginia-minimum-wage-youth-exemptions",
+  },
+  {
+    title: "United States v. Simons: workplace computer privacy",
+    jurisdiction: "4TH CIRCUIT",
+    status: "Decided in 2000",
+    stage: 3,
+    before:
+      "A government employee used a workplace computer subject to an agency monitoring policy.",
+    after:
+      "The Fourth Circuit found no reasonable expectation of privacy in the files under those circumstances; it did not decide school-device searches.",
+    verified: "Nov. 23, 2026",
+    sourceLabel: "206 F.3d 392 (4th Cir. 2000)",
+    source: "https://law.justia.com/cases/federal/appellate-courts/F3/206/392/",
+    briefing: "fourth-circuit-student-digital-privacy",
+  },
+  {
+    title: "Mahanoy Area School District v. B.L.: off-campus speech",
+    jurisdiction: "U.S. SUPREME COURT",
+    status: "Decided in 2021",
+    stage: 3,
+    before:
+      "A public school disciplined a student for an off-campus social-media post.",
+    after:
+      "The Court recognized limits on school authority over off-campus speech, while leaving room for intervention in some circumstances.",
+    verified: "Nov. 21, 2026",
+    sourceLabel: "594 U.S. 180 (2021)",
+    source: "https://supreme.justia.com/cases/federal/us/594/180/",
+    briefing: "mahanoy-student-speech-1st-amendment",
+  },
+  {
+    title: "CFPB Buy Now, Pay Later interpretive rule",
+    jurisdiction: "CFPB / FEDERAL",
+    status: "2024 guidance withdrawn in 2025",
+    stage: 3,
+    before:
+      "The CFPB’s 2024 interpretation described certain BNPL lenders as card issuers for parts of Regulation Z.",
+    after:
+      "The CFPB withdrew that interpretation in 2025; it should not be treated as current binding guidance.",
+    verified: "Nov. 23, 2026",
+    sourceLabel: "FEDERAL REGISTER · 2025-08286",
+    source:
+      "https://www.federalregister.gov/documents/2025/05/12/2025-08286/interpretive-rules-policy-statements-and-advisory-opinions-withdrawal",
+    briefing: "cfpb-buy-now-pay-later-protections",
+  },
+];
+---
+
+<Layout
+  title={`2027 Watchlist | ${config.site.title}`}
+  description="Source-linked monitoring of Virginia and federal laws and cases affecting students and workers ahead of the 2027 Virginia General Assembly session."
+>
+  <Header />
+  <Breadcrumb />
+  <main id="main-content" class="mx-auto w-full max-w-6xl px-4 pb-12">
+    <header class="mb-8">
+      <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+        Virginia &amp; federal law · 2027
+      </p>
+      <h1 class="font-heading text-forest mt-2 text-4xl font-bold sm:text-5xl">
+        2027 Watchlist
+      </h1>
+      <p
+        class="text-muted-foreground mt-3 max-w-3xl text-sm leading-relaxed sm:text-base"
+      >
+        A source-linked dashboard of laws, court decisions, and federal actions
+        that may shape the rights and paychecks of students and workers.
+      </p>
+      <p
+        class="border-marigold bg-muted text-foreground mt-5 rounded-xl border-l-4 p-4 text-sm leading-relaxed"
+      >
+        These are issue-monitoring topics based on enacted laws, decided cases,
+        and agency actions—not five pending bills or cases. We’ll add 2027
+        legislation and active appeals when official records confirm their
+        status.
+      </p>
+    </header>
+
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+      <p class="text-muted-foreground text-sm">
+        Maintained by Virginia Legal Brief’s 10-intern research team ahead of
+        the January 2027 Virginia General Assembly session.
+      </p>
+      <p
+        class="text-forest bg-marigold/30 rounded-full px-3 py-1.5 text-xs font-bold tracking-wide"
+      >
+        5 SOURCE-LINKED TOPICS
+      </p>
+    </div>
+
+    <section class="grid gap-5" aria-label="Tracked laws and cases">
+      {
+        watchItems.map((item, index) => (
+          <article class="border-border bg-parchment rounded-2xl border p-5 shadow-sm sm:p-6">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p class="text-muted-foreground text-xs font-bold tracking-[0.12em] uppercase">
+                  Watch {String(index + 1).padStart(2, "0")}
+                </p>
+                <h2 class="font-heading text-forest mt-1 text-2xl font-bold">
+                  {item.title}
+                </h2>
+              </div>
+              <span class="bg-forest text-parchment inline-flex w-fit shrink-0 rounded-full px-3 py-1.5 text-[0.65rem] font-bold tracking-[0.08em]">
+                {item.jurisdiction}
+              </span>
+            </div>
+
+            <p class="text-foreground mt-3 text-sm font-semibold">
+              Status: {item.status}
+            </p>
+
+            <ol
+              class="mt-5 grid grid-cols-4 gap-2"
+              aria-label={`Pipeline for ${item.title}`}
+            >
+              {stages.map((stage, stageIndex) => {
+                const current = stageIndex === item.stage;
+                const complete = stageIndex < item.stage;
+
+                return (
+                  <li
+                    class:list={[
+                      "relative flex min-h-20 flex-col items-center justify-start gap-2 rounded-lg border px-1.5 py-2 text-center sm:min-h-16 sm:flex-row sm:justify-center sm:px-3",
+                      current
+                        ? "border-marigold bg-marigold text-forest"
+                        : complete
+                          ? "border-forest/20 bg-forest/5 text-forest"
+                          : "border-border bg-background text-muted-foreground",
+                    ]}
+                    aria-current={current ? "step" : undefined}
+                  >
+                    <span
+                      class:list={[
+                        "flex size-5 shrink-0 items-center justify-center rounded-full text-[0.65rem] font-bold",
+                        current
+                          ? "bg-forest text-parchment"
+                          : complete
+                            ? "bg-forest text-parchment"
+                            : "border-border border",
+                      ]}
+                      aria-hidden="true"
+                    >
+                      {complete || current ? "✓" : stageIndex + 1}
+                    </span>
+                    <span class="text-[0.62rem] leading-tight font-bold sm:text-xs">
+                      {stage}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+
+            <section class="mt-5" aria-labelledby={`comparison-${index}`}>
+              <h3
+                id={`comparison-${index}`}
+                class="text-forest text-sm font-bold"
+              >
+                Before vs. After (What Changes for You)
+              </h3>
+              <div class="mt-2 grid gap-3 sm:grid-cols-2">
+                <div class="border-border bg-background rounded-xl border p-4">
+                  <p class="text-muted-foreground text-[0.65rem] font-bold tracking-[0.12em] uppercase">
+                    Before
+                  </p>
+                  <p class="text-foreground mt-2 text-sm leading-relaxed">
+                    {item.before}
+                  </p>
+                </div>
+                <div class="border-marigold/70 bg-marigold/10 rounded-xl border p-4">
+                  <p class="text-forest text-[0.65rem] font-bold tracking-[0.12em] uppercase">
+                    After / What changes for you
+                  </p>
+                  <p class="text-foreground mt-2 text-sm leading-relaxed">
+                    {item.after}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <div class="border-border mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
+              <a
+                href={item.source}
+                target="_blank"
+                rel="noreferrer"
+                class="text-forest decoration-manila text-xs font-bold underline decoration-2 underline-offset-4 hover:decoration-4"
+              >
+                {item.sourceLabel} ↗
+              </a>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <a
+                  href={getRelativeLocaleUrl(locale, `posts/${item.briefing}`)}
+                  class="text-forest decoration-manila text-xs font-semibold underline underline-offset-4 hover:decoration-2"
+                >
+                  Read briefing →
+                </a>
+                <p class="text-muted-foreground text-xs">
+                  Last verified:{" "}
+                  <time datetime={new Date(item.verified).toISOString()}>
+                    {item.verified}
+                  </time>
+                </p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </section>
+  </main>
+  <Footer />
+</Layout>

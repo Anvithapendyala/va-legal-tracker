@@ -128,69 +128,157 @@ const dateLabel = (date: Date) =>
       />
     </section>
 
-    <section class="mt-12 sm:mt-16" aria-labelledby="latest-changes-title">
-      <div
-        class="border-border flex flex-wrap items-end justify-between gap-4 border-b pb-4"
-      >
-        <div>
-          <p
-            class="text-foreground text-xs font-bold tracking-[0.16em] uppercase"
-          >
-            Virginia &amp; U.S. law
-          </p>
-          <h2
-            id="latest-changes-title"
-            class="mt-2 text-3xl font-bold sm:text-4xl"
-          >
-            Latest changes
-          </h2>
-        </div>
-        <a
-          href={getRelativeLocaleUrl(locale, "posts")}
-          class="text-forest decoration-manila text-sm font-bold underline decoration-2 underline-offset-4 hover:decoration-4"
+    <section
+      class="mt-12 grid gap-8 sm:mt-16 lg:grid-cols-12"
+      aria-label="Latest changes and active watchlist"
+    >
+      <section class="lg:col-span-7" aria-labelledby="latest-changes-title">
+        <div
+          class="border-border flex flex-wrap items-end justify-between gap-4 border-b pb-4"
         >
-          Full case library →
-        </a>
-      </div>
+          <div>
+            <p
+              class="text-foreground text-xs font-bold tracking-[0.16em] uppercase"
+            >
+              Virginia &amp; U.S. law
+            </p>
+            <h2
+              id="latest-changes-title"
+              class="mt-2 text-3xl font-bold sm:text-4xl"
+            >
+              Latest changes
+            </h2>
+          </div>
+          <a
+            href={getRelativeLocaleUrl(locale, "posts")}
+            class="text-forest decoration-manila text-sm font-bold underline decoration-2 underline-offset-4 hover:decoration-4"
+          >
+            Full case library →
+          </a>
+        </div>
 
-      <ul class="divide-border divide-y">
-        {
-          latestPosts.slice(0, 4).map(post => (
-            <li class="py-5 sm:py-6">
-              <div class="flex flex-wrap items-center gap-2.5">
-                <time
-                  class="text-muted-foreground text-xs font-bold tracking-[0.1em]"
-                  datetime={post.data.pubDatetime.toISOString()}
-                >
-                  {dateLabel(post.data.pubDatetime)}
-                </time>
-                <span class="bg-manila text-forest rounded-sm px-2.5 py-1 text-[0.65rem] font-bold tracking-wide">
-                  {post.data.sourceLabel}
-                </span>
-              </div>
-              <p class="text-foreground mt-2 max-w-4xl text-sm leading-relaxed sm:text-base">
-                {post.data.description}
-              </p>
-              <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold">
-                <a
-                  href={primarySources[post.id]}
-                  target="_blank"
-                  rel="noreferrer"
-                  class="text-forest decoration-manila underline underline-offset-4 hover:decoration-2"
-                >
-                  Primary source ↗
-                </a>
-                <a
-                  href={getPostUrl(post.id, post.filePath, locale)}
-                  class="text-forest decoration-manila underline underline-offset-4 hover:decoration-2"
-                >
-                  Read briefing →
-                </a>
-              </div>
-            </li>
-          ))
-        }
-      </ul>
+        <ul class="divide-border divide-y">
+          {
+            latestPosts.slice(0, 4).map(post => (
+              <li class="py-5 sm:py-6">
+                <div class="flex flex-wrap items-center gap-2.5">
+                  <time
+                    class="text-muted-foreground text-xs font-bold tracking-[0.1em]"
+                    datetime={post.data.pubDatetime.toISOString()}
+                  >
+                    {dateLabel(post.data.pubDatetime)}
+                  </time>
+                  <span class="bg-manila text-forest rounded-sm px-2.5 py-1 text-[0.65rem] font-bold tracking-wide">
+                    {post.data.sourceLabel}
+                  </span>
+                </div>
+                <p class="text-foreground mt-2 max-w-4xl text-sm leading-relaxed sm:text-base">
+                  {post.data.description}
+                </p>
+                <div class="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold">
+                  <a
+                    href={primarySources[post.id]}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="text-forest decoration-manila underline underline-offset-4 hover:decoration-2"
+                  >
+                    Primary source ↗
+                  </a>
+                  <a
+                    href={getPostUrl(post.id, post.filePath, locale)}
+                    class="text-forest decoration-manila underline underline-offset-4 hover:decoration-2"
+                  >
+                    Read briefing →
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <aside
+        class="border-border bg-parchment flex flex-col rounded-2xl border p-5 shadow-sm sm:p-6 lg:col-span-5"
+        aria-labelledby="watchlist-preview-title"
+      >
+        <p class="text-forest text-xs font-bold tracking-[0.16em] uppercase">
+          2027 Live Watchlist
+        </p>
+        <h2
+          id="watchlist-preview-title"
+          class="font-heading text-forest mt-2 text-2xl font-bold"
+        >
+          2027 VA &amp; Federal Watchlist
+        </h2>
+        <ul class="divide-border mt-4 flex-1 divide-y">
+          <li class="py-3 first:pt-0">
+            <a
+              href={getPostUrl(
+                "virginia-minimum-wage-youth-exemptions",
+                undefined,
+                locale
+              )}
+              class="group focus-visible:outline-accent block rounded-sm focus-visible:outline-2 focus-visible:outline-dashed"
+            >
+              <span
+                class="bg-forest text-parchment inline-flex rounded-full px-2.5 py-1 text-[0.62rem] font-bold tracking-[0.08em]"
+              >
+                JAN 2027 SESSION
+              </span>
+              <span class="text-foreground mt-2 block text-sm leading-relaxed">
+                Virginia’s scheduled $13.75 minimum wage may change what young
+                workers take home.
+              </span>
+            </a>
+          </li>
+          <li class="py-3">
+            <a
+              href={getPostUrl(
+                "fourth-circuit-student-digital-privacy",
+                undefined,
+                locale
+              )}
+              class="group focus-visible:outline-accent block rounded-sm focus-visible:outline-2 focus-visible:outline-dashed"
+            >
+              <span
+                class="bg-forest text-parchment inline-flex rounded-full px-2.5 py-1 text-[0.62rem] font-bold tracking-[0.08em]"
+              >
+                4TH CIRCUIT
+              </span>
+              <span class="text-foreground mt-2 block text-sm leading-relaxed">
+                Workplace device precedent—and its limits—matter when students’
+                digital privacy is at stake.
+              </span>
+            </a>
+          </li>
+          <li class="py-3">
+            <a
+              href={getPostUrl(
+                "mahanoy-student-speech-1st-amendment",
+                undefined,
+                locale
+              )}
+              class="group focus-visible:outline-accent block rounded-sm focus-visible:outline-2 focus-visible:outline-dashed"
+            >
+              <span
+                class="bg-forest text-parchment inline-flex rounded-full px-2.5 py-1 text-[0.62rem] font-bold tracking-[0.08em]"
+              >
+                U.S. SUPREME COURT
+              </span>
+              <span class="text-foreground mt-2 block text-sm leading-relaxed">
+                Off-campus speech rules shape when public schools can discipline
+                students.
+              </span>
+            </a>
+          </li>
+        </ul>
+        <a
+          href={getRelativeLocaleUrl(locale, "watchlist")}
+          class="bg-marigold text-forest mt-4 inline-flex w-full justify-center rounded-lg px-4 py-3 text-center text-sm font-bold transition hover:brightness-95"
+        >
+          Track All Active Bills &amp; Cases →
+        </a>
+      </aside>
     </section>
 
     <section class="mt-12 sm:mt-16" aria-labelledby="reference-guides-title">
