@@ -20,7 +20,7 @@
 
 /* Light theme values */
 :root,
-[data-theme="light"] {
+html[data-theme="light"] {
   --background: #F8F5EB;
   --foreground: #17392F;
   --accent: #E4AB49;
@@ -36,15 +36,15 @@
   --header-foreground: #F8F5EB;
 }
 
-/* Dark theme values */
-[data-theme="dark"] {
-  --background: #101712;
-  --foreground: #F8F5EB;
+/* Keep even a stale dark-theme attribute on the light palette. */
+html[data-theme="dark"] {
+  --background: #F8F5EB;
+  --foreground: #17392F;
   --accent: #E4AB49;
   --accent-foreground: #17392F;
-  --muted: #1A281F;
-  --muted-foreground: #B7C7B8;
-  --border: #35473A;
+  --muted: #ECE7D8;
+  --muted-foreground: #526458;
+  --border: #D3CCB9;
   --manila: #DDA853;
   --stamp-red: #9E3B2B;
   --forest: #17392F;
